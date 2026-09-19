@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Check, Lock, ShieldCheck, Download } from "lucide-react";
 import { commercial, logos, offer, product } from "@/data/glowFinances";
 import { scaleIn } from "@/lib/animations";
-import BookMockup from "./BookMockup";
 import CTAButton from "./CTAButton";
 import Footer from "./Footer";
 import Parallax from "./Parallax";
