@@ -17,7 +17,7 @@ export default function AudienceSection() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="max-w-2xl">
             <Reveal index={0} as="p" className="eyebrow mb-5 text-glow-terracotta">
-              07 — Para quem é
+              05 · Para quem é
             </Reveal>
             <Reveal index={1}>
               <h2 id="para-quem-title" className="text-display text-[clamp(2rem,4.4vw,3.4rem)] text-glow-black">

@@ -30,8 +30,8 @@ export default function BookMockup({ className = "w-[240px]", sizes = "240px", p
       <div aria-hidden="true" className="absolute inset-x-[12%] -bottom-4 h-8 rounded-[50%] bg-glow-black/30 blur-2xl" />
       <div className="relative h-full w-full transition-transform duration-700 ease-[var(--ease-glow)] hover:-translate-y-1 hover:scale-[1.02]">
         <Image
-          src="/images/cover.webp"
-          alt="Ebook Glow Finances — O guia prático para mulheres que querem cuidar do dinheiro e construir liberdade, por Fernanda Oliveira"
+          src="/images/cover.png"
+          alt="Ebook Glow Finances: o guia prático para mulheres que querem cuidar do dinheiro e construir liberdade, por Fernanda Oliveira"
           fill
           sizes={sizes}
           priority={priority}

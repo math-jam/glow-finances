@@ -21,7 +21,7 @@ export default function ContinueButton({ to, label = "Continuar", tone = "light"
     <button
       type="button"
       onClick={() => scrollToSection(to)}
-      aria-label={`${label} — ir para a próxima seção`}
+      aria-label={`${label}: ir para a próxima seção`}
       className={`group inline-flex min-h-12 items-center gap-3 rounded-[var(--radius-pill)] border px-5 py-2 font-sans text-[0.68rem] font-medium uppercase tracking-[0.26em] transition-all duration-500 ease-[var(--ease-glow)] hover:-translate-y-0.5 ${color} ${className}`}
     >
       <span>{label}</span>

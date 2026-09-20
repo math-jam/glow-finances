@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Check, Gift } from "lucide-react";
 import { bonus } from "@/data/glowFinances";
@@ -8,15 +9,7 @@ import CTAButton from "./CTAButton";
 import Parallax from "./Parallax";
 import Reveal from "./Reveal";
 
-const toneBar: Record<string, string> = {
-  olive: "bg-glow-olive/70",
-  terracotta: "bg-glow-terracotta/70",
-  beige: "bg-glow-beige",
-};
-
-const widths = ["82%", "58%", "40%", "24%", "66%"];
-
-/** Mockup de notebook com a planilha desenhada em CSS (sem números inventados). */
+/** Mockup de notebook com a tela real da Planilha Glow Finances. */
 function SpreadsheetMockup() {
   return (
     <motion.div
@@ -24,61 +17,22 @@ function SpreadsheetMockup() {
       whileInView="visible"
       viewport={viewport}
       variants={scaleIn}
-      className="relative mx-auto w-full max-w-[560px]"
+      className="relative mx-auto w-full max-w-[600px]"
     >
       {/* Brilho de "presente" atrás do notebook */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-[-10%] rounded-full bg-glow-cream/20 blur-3xl"
-      />
+      <div aria-hidden="true" className="absolute inset-[-10%] rounded-full bg-glow-cream/20 blur-3xl" />
 
       {/* Tela */}
       <div className="relative rounded-t-[14px] border-[6px] border-b-0 border-glow-black bg-glow-black shadow-[var(--shadow-deep)]">
-        <div className="overflow-hidden rounded-t-[8px] bg-glow-cream">
-          {/* Barra superior */}
-          <div className="flex items-center justify-between border-b border-glow-black/10 px-4 py-2.5">
-            <span className="font-serif text-[0.8rem] text-glow-black">{bonus.mockup.title}</span>
-            <span className="flex gap-1.5" aria-hidden="true">
-              <span className="h-2 w-2 rounded-full bg-glow-beige" />
-              <span className="h-2 w-2 rounded-full bg-glow-beige" />
-              <span className="h-2 w-2 rounded-full bg-glow-terracotta/60" />
-            </span>
-          </div>
-
-          {/* Tabela */}
-          <div className="p-4 sm:p-5">
-            <div className="grid grid-cols-[1fr_auto] items-center gap-4 border-b border-glow-black/10 pb-2 font-sans text-[0.55rem] uppercase tracking-[0.22em] text-glow-black/45">
-              <span>Categoria</span>
-              <span>Acompanhamento</span>
-            </div>
-            <ul className="mt-2 flex flex-col gap-2.5" aria-label="Categorias da planilha">
-              {bonus.mockup.rows.map((row, i) => (
-                <li key={row.label} className="grid grid-cols-[1fr_46%] items-center gap-4 sm:grid-cols-[1fr_52%]">
-                  <span className="truncate font-sans text-[0.72rem] text-glow-black/80 sm:text-[0.78rem]">{row.label}</span>
-                  <span className="relative block h-2 overflow-hidden rounded-full bg-glow-black/8">
-                    <motion.span
-                      variants={{ hidden: { scaleX: 0 }, visible: { scaleX: 1 } }}
-                      transition={{ duration: 1.1, ease: EASE, delay: 0.3 + i * 0.12 }}
-                      style={{ width: widths[i] }}
-                      className={`absolute inset-y-0 left-0 origin-left rounded-full ${toneBar[row.tone]}`}
-                    />
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Rodapé da planilha: meta + revisão mensal */}
-            <div className="mt-4 hidden grid-cols-2 gap-3 sm:grid">
-              <div className="rounded-[var(--radius-sm)] bg-glow-white p-3">
-                <p className="font-sans text-[0.55rem] uppercase tracking-[0.2em] text-glow-black/45">Meta</p>
-                <p className="mt-1 font-serif text-[0.9rem] text-glow-black">Reserva de emergência</p>
-              </div>
-              <div className="rounded-[var(--radius-sm)] bg-glow-white p-3">
-                <p className="font-sans text-[0.55rem] uppercase tracking-[0.2em] text-glow-black/45">Rotina</p>
-                <p className="mt-1 font-serif text-[0.9rem] text-glow-black">Revisão mensal</p>
-              </div>
-            </div>
-          </div>
+        <div className="relative aspect-[878/545] overflow-hidden rounded-t-[8px] bg-[#2b2b2b]">
+          <Image
+            src="/images/planilha.webp"
+            alt="Tela da Planilha Financeira Glow Finances: entradas, gastos, guardado, saldo do mês, gráfico de categorias e metas"
+            fill
+            sizes="(min-width: 1024px) 600px, 100vw"
+            quality={90}
+            className="object-cover object-top"
+          />
         </div>
       </div>
       {/* Base do notebook */}
@@ -150,7 +104,7 @@ export default function BonusSection() {
           </div>
 
           <div className="relative">
-            {/* Badge "BÔNUS" — presente premium */}
+            {/* Badge "BÔNUS": presente premium */}
             <motion.span
               initial={{ opacity: 0, scale: 0.8, rotate: -8 }}
               whileInView={{ opacity: 1, scale: 1, rotate: -8 }}

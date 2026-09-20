@@ -69,11 +69,23 @@ export default function UrgencyTimer({ tone = "dark" }: { tone?: "dark" | "light
   return (
     <div>
       <p className={`eyebrow ${muted}`}>{offer.timerLabel}</p>
-      <div
+      {/* Mobile: uma linha compacta */}
+      <p
         role="timer"
-        aria-live="off"
         aria-label={`${offer.timerLabel}: ${readable}`}
-        className="mt-3 flex items-center gap-1.5 sm:mt-4 sm:gap-3"
+        className={`mt-2 flex items-baseline gap-2 font-serif text-[1.35rem] tabular-nums sm:hidden ${text}`}
+      >
+        {blocks.map((b, i) => (
+          <span key={b.label} className="flex items-baseline gap-0.5">
+            {b.value}
+            <span className={`font-sans text-[0.55rem] uppercase tracking-[0.12em] ${muted}`}>{b.label[0]}</span>
+            {i < blocks.length - 1 && <span className={`ml-1.5 ${muted}`}>:</span>}
+          </span>
+        ))}
+      </p>
+      <div
+        aria-hidden="true"
+        className="mt-3 hidden items-center gap-1.5 sm:mt-4 sm:flex sm:gap-3"
       >
         {blocks.map((b, i) => (
           <div key={b.label} className="flex items-center gap-2 sm:gap-3">

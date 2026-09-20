@@ -17,7 +17,7 @@ export default function FAQ() {
         <div className="grid gap-8 lg:grid-cols-[36fr_64fr] lg:items-center lg:gap-16">
           <div>
             <Reveal index={0} as="p" className="eyebrow mb-6 text-glow-terracotta">
-              09 — Dúvidas
+              07 · Dúvidas
             </Reveal>
             <Reveal index={1}>
               <h2

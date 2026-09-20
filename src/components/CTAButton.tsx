@@ -25,7 +25,7 @@ interface Props {
 }
 
 const base =
-  "group inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-[var(--radius-pill)] font-sans font-medium tracking-[0.18em] uppercase transition-all duration-500 ease-[var(--ease-glow)] will-change-transform hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 select-none";
+  "group inline-flex items-center justify-center gap-3 text-center sm:whitespace-nowrap rounded-[var(--radius-pill)] font-sans font-medium tracking-[0.18em] uppercase transition-all duration-500 ease-[var(--ease-glow)] will-change-transform hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 select-none";
 
 const sizes: Record<NonNullable<Props["size"]>, string> = {
   md: "min-h-12 px-7 text-[0.7rem]",

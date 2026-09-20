@@ -25,7 +25,7 @@ export default function DiagnosisSection() {
         <div className="grid gap-7 lg:grid-cols-[46fr_54fr] lg:items-center lg:gap-12">
           <div>
             <Reveal index={0} as="p" className="eyebrow mb-5 text-glow-beige/70">
-              02 — Diagnóstico
+              02 · Diagnóstico
             </Reveal>
             <Reveal index={1}>
               <h2 id="diagnostico-title" className="text-display text-[clamp(2.1rem,5vw,3.9rem)]">
@@ -44,7 +44,7 @@ export default function DiagnosisSection() {
             </Reveal>
           </div>
 
-          {/* Perguntas — uma por vez, blur → nítido */}
+          {/* Perguntas: uma por vez, blur → nítido */}
           <ol className="flex flex-col gap-4 lg:gap-8" aria-label="Perguntas do diagnóstico">
             {diagnosis.questions.map((q, i) => (
               <Reveal

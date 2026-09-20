@@ -22,7 +22,7 @@ npm run lint
 | --- | --- | --- |
 | **URL do checkout** | `src/lib/checkout.ts` | `CHECKOUT_URL` (todos os CTAs usam `handleCheckout()`, que preserva UTMs) |
 | **Deadline do timer** | `src/lib/checkout.ts` | `OFFER_END_DATE` (ISO com fuso, ex. `2026-12-31T23:59:59-03:00`) |
-| **Preço / preço anterior / parcelas** | `src/data/glowFinances.ts` | `commercial.price`, `commercial.previousPrice` (deixe `""` para ocultar), `commercial.installments` |
+| **Preço / preço anterior / parcelas** | `src/data/glowFinances.ts` | `commercial.price` (hoje `R$ 97,00`), `commercial.previousPrice` (`""` = oculto), `commercial.installments` |
 | **Selos de confiança** | `src/data/glowFinances.ts` | `commercial.trustBadges` — manter só o que for verdadeiro no checkout |
 | **Domínio canônico / OG** | `src/data/glowFinances.ts` | `commercial.canonicalUrl` |
 | **E-mail, Termos, Privacidade** | `src/data/glowFinances.ts` | `commercial.contactEmail`, `termsUrl`, `privacyUrl` |
@@ -40,8 +40,6 @@ npm run lint
 
 Busque por `[INSERIR` em `src/data/glowFinances.ts`:
 
-- `commercial.price` → `[INSERIR PREÇO]`
-- `commercial.previousPrice` → `[INSERIR PREÇO ANTERIOR SE EXISTIR]`
 - `commercial.canonicalUrl` → `https://[INSERIR-DOMINIO]`
 - `commercial.contactEmail` → `[INSERIR E-MAIL DE CONTATO]`
 - `src/lib/checkout.ts` → `CHECKOUT_URL` e `OFFER_END_DATE`
@@ -56,22 +54,21 @@ Busque por `[INSERIR` em `src/data/glowFinances.ts`:
 src/
   app/
     layout.tsx        Fontes (Playfair Display + Inter), metadata/SEO/OG
-    page.tsx          Composição das 10 seções + overlays
+    page.tsx          Composição das 9 seções + overlays
     globals.css       Tokens (--glow-*), scroll-snap (1 seção = 1 tela), utilitários, noise
   components/
     Hero.tsx                 01 · Foto de fundo com parallax, monograma GF, mockup 3D
     DiagnosisSection.tsx     02 · 3 perguntas do diagnóstico (fade + blur → nítido)
     MethodSection.tsx        03 · Problema + método: Skincare → Finanças em 4 frascos
     GlossarySection.tsx      04 · Traduzindo o Financês (glossário real) + logo compacto
-    ContentSection.tsx       05 · 6 áreas expansíveis + seções editoriais do ebook
-    BonusSection.tsx         06 · Planilha em mockup de notebook (CSS)
-    AudienceSection.tsx      07 · É / não é para você + Confusão → Clareza
-    AuthorSection.tsx        08 · Fernanda Oliveira (foto real + bio placeholder)
-    FAQ.tsx                  09 · Accordion (6 perguntas)
-    OfferSection.tsx         10 · Card de oferta + timer + logo script + footer
+    BonusSection.tsx         05 · Planilha em mockup de notebook (CSS)
+    AudienceSection.tsx      06 · É / não é para você + Confusão → Clareza
+    AuthorSection.tsx        07 · Fernanda Oliveira (foto real + bio placeholder)
+    FAQ.tsx                  08 · Accordion (6 perguntas)
+    OfferSection.tsx         09 · Card de oferta + timer + logo script + footer
     UrgencyTimer.tsx         Timer baseado em OFFER_END_DATE (persistente, sem reset)
     StickyCTA.tsx            Barra fixa (após Hero no mobile / 35% no desktop; some no FAQ)
-    SectionNavigator.tsx     Indicador lateral 01–10 (desktop)
+    SectionNavigator.tsx     Indicador lateral 01–09 (desktop)
     ScrollProgress.tsx       Barra de progresso horizontal (mobile/tablet)
     CTAButton.tsx            Botão (<a> real para checkout / <button> para scroll)
     ContinueButton.tsx       "Continuar ↓"

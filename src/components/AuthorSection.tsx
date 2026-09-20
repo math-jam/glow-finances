@@ -44,7 +44,7 @@ export default function AuthorSection() {
           {/* Texto */}
           <div className="max-w-xl">
             <Reveal index={0} as="p" className="eyebrow mb-6 text-glow-terracotta">
-              08 — {author.eyebrow}
+              06 · {author.eyebrow}
             </Reveal>
             <Reveal index={1}>
               <h2

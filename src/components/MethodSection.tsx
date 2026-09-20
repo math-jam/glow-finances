@@ -76,7 +76,7 @@ export default function MethodSection() {
         <div className="grid gap-6 lg:grid-cols-[52fr_48fr] lg:items-end lg:gap-12">
           <div>
             <Reveal index={0} as="p" className="eyebrow mb-5 text-glow-brown/70">
-              03 — O método Glow
+              03 · O método Glow
             </Reveal>
             <Reveal index={1}>
               <h2 id="metodo-title" className="text-display text-[clamp(2rem,4.4vw,3.4rem)] text-glow-black">

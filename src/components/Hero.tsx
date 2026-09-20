@@ -1,30 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { hero, logos, product } from "@/data/glowFinances";
 import { EASE } from "@/lib/animations";
-import BookMockup from "./BookMockup";
 import CTAButton from "./CTAButton";
-import Parallax from "./Parallax";
 
-const tagPositions = [
-  { className: "left-[-34%] top-[10%]", speed: 0.22 },
-  { className: "right-[-40%] top-[22%]", speed: -0.12 },
-  { className: "left-[-26%] bottom-[22%]", speed: -0.18 },
-  { className: "right-[-34%] bottom-[6%]", speed: 0.14 },
+/* Etiquetas ao redor do retrato, cada uma em uma "profundidade" diferente. */
+const tags = [
+  { className: "left-[-14%] top-[14%]", depth: 1.7 },
+  { className: "right-[-12%] top-[30%]", depth: 0.8 },
+  { className: "left-[-8%] bottom-[26%]", depth: 1.2 },
+  { className: "right-[-16%] bottom-[12%]", depth: 2.1 },
 ];
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+
+  /* Parallax de scroll */
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.18]);
-  const bookY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const mobilePhotoY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const ambientY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  /* Parallax de ponteiro: camadas se deslocam em velocidades diferentes (efeito 3D) */
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const spring = { stiffness: 60, damping: 18, mass: 0.6 };
+  const sx = useSpring(px, spring);
+  const sy = useSpring(py, spring);
+  const cardX = useTransform(sx, (v) => v * -14);
+  const cardY = useTransform(sy, (v) => v * -10);
+  const cardRot = useTransform(sx, (v) => v * 1.2);
+  const frameX = useTransform(sx, (v) => v * 12);
+  const frameY = useTransform(sy, (v) => v * 10);
+  const ambientX = useTransform(sx, (v) => v * -26);
+
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent<HTMLElement>) => {
+      if (reduce || e.pointerType !== "mouse") return;
+      const r = ref.current?.getBoundingClientRect();
+      if (!r) return;
+      px.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+      py.set(((e.clientY - r.top) / r.height - 0.5) * 2);
+    },
+    [px, py, reduce],
+  );
+  const onPointerLeave = useCallback(() => {
+    px.set(0);
+    py.set(0);
+  }, [px, py]);
 
   const rise = (i: number) => ({
     initial: reduce ? false : { opacity: 0, y: 26 },
@@ -32,41 +61,85 @@ export default function Hero() {
     transition: { duration: 1, ease: EASE, delay: 0.15 + i * 0.12 },
   });
 
+  const portrait = (
+    <motion.div
+      className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-deep)] ring-1 ring-glow-black/10"
+      style={{ x: reduce ? 0 : cardX, y: reduce ? 0 : cardY, rotate: reduce ? 0 : cardRot }}
+    >
+      <Image
+        src="/images/hero-fernanda.webp"
+        alt="Fernanda Oliveira, autora do Glow Finances"
+        fill
+        priority
+        quality={90}
+        sizes="(min-width: 1024px) 480px, 200px"
+        className="object-cover object-[50%_18%]"
+      />
+    </motion.div>
+  );
+
   return (
     <section
       id="hero"
       ref={ref}
       aria-labelledby="hero-title"
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
       className="snap-section flex flex-col overflow-hidden bg-glow-cream"
     >
-      {/* Foto de fundo com parallax lento */}
+      {/* Mobile: foto preenchendo o topo inteiro, desfocando e fundindo com o fundo para baixo */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{ y: reduce ? 0 : bgY, scale: reduce ? 1 : bgScale }}
+        className="pointer-events-none absolute inset-x-0 top-0 h-[62svh] lg:hidden"
+        style={{ y: reduce ? 0 : mobilePhotoY }}
       >
-        <Image
-          src="/images/reading.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[70%_65%] opacity-80 lg:object-[55%_72%]"
+        {/* Camada nítida (some a partir da metade) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            maskImage: "linear-gradient(180deg, #000 0%, #000 42%, transparent 78%)",
+            WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 42%, transparent 78%)",
+          }}
+        >
+          <Image src="/images/hero-fernanda.webp" alt="" fill priority quality={90} sizes="100vw" className="object-cover object-[50%_0%]" />
+        </div>
+        {/* Camada desfocada (aparece na metade de baixo) */}
+        <div
+          className="absolute -inset-[6%]"
+          style={{
+            maskImage: "linear-gradient(180deg, transparent 30%, #000 55%, #000 80%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(180deg, transparent 30%, #000 55%, #000 80%, transparent 100%)",
+          }}
+        >
+          <Image src="/images/hero-fernanda.webp" alt="" fill quality={70} sizes="100vw" className="object-cover object-[50%_0%] blur-xl" />
+        </div>
+        {/* Fusão com o fundo cream */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-[55%]"
+          style={{ background: "linear-gradient(180deg, rgba(248,245,241,0) 0%, rgba(248,245,241,0.75) 55%, #F8F5F1 100%)" }}
         />
       </motion.div>
-      {/* Véu editorial: legibilidade à esquerda, foto respirando à direita */}
+
+      {/* Desktop: fundo ambiente, a mesma foto desfocada e suave, em outra profundidade */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -inset-[8%] hidden lg:block lg:left-[36%]"
+        style={{ y: reduce ? 0 : ambientY, x: reduce ? 0 : ambientX }}
+      >
+        <Image src="/images/hero-ambient.webp" alt="" fill sizes="70vw" className="object-cover object-[50%_20%] opacity-60 blur-2xl" />
+      </motion.div>
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 hidden lg:block"
         style={{
           background:
-            "linear-gradient(90deg, rgba(248,245,241,0.98) 0%, rgba(248,245,241,0.94) 38%, rgba(248,245,241,0.6) 60%, rgba(248,245,241,0.18) 100%)",
+            "linear-gradient(90deg, #F8F5F1 0%, rgba(248,245,241,0.96) 34%, rgba(248,245,241,0.7) 50%, rgba(248,245,241,0.35) 70%, rgba(248,245,241,0.55) 100%)",
         }}
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
-        style={{ background: "linear-gradient(0deg, rgba(248,245,241,0.9), rgba(248,245,241,0))" }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-40 lg:block"
+        style={{ background: "linear-gradient(0deg, rgba(248,245,241,0.85), rgba(248,245,241,0))" }}
       />
 
       <div className="container-glow relative flex flex-1 flex-col pb-4 pt-5 lg:pb-8 lg:pt-8">
@@ -85,17 +158,18 @@ export default function Hero() {
           </span>
         </motion.header>
 
-        <div className="grid flex-1 items-center gap-5 pt-5 lg:grid-cols-[46fr_54fr] lg:gap-6 lg:pl-16 lg:pt-0">
-          {/* Coluna de texto */}
+        <div className="flex flex-1 flex-col justify-end pt-[30svh] lg:grid lg:grid-cols-[48fr_52fr] lg:items-center lg:gap-8 lg:pl-16 lg:pt-0">
+
+          {/* Texto */}
           <motion.div style={{ y: reduce ? 0 : textY }} className="relative z-10 max-w-xl">
-            <motion.p {...rise(1)} className="eyebrow mb-5 text-glow-terracotta">
+            <motion.p {...rise(1)} className="eyebrow mb-4 text-glow-terracotta lg:mb-5">
               {hero.eyebrow}
             </motion.p>
 
             <motion.h1
               {...rise(2)}
               id="hero-title"
-              className="text-display text-[clamp(2.4rem,8.4vw,4rem)] text-glow-black lg:max-w-none lg:text-[3.2rem] xl:w-[128%] xl:text-[4.3rem]"
+              className="text-display text-[clamp(2.1rem,7.6vw,4rem)] text-glow-black lg:max-w-none lg:text-[3.4rem] xl:w-[120%] xl:text-[4.3rem]"
             >
               {hero.headline[0]}
               <br />
@@ -109,10 +183,7 @@ export default function Hero() {
               {hero.subheadline}
             </motion.p>
 
-            <motion.div
-              {...rise(4)}
-              className="mt-5 flex flex-col gap-3 sm:flex-row lg:mt-8 lg:gap-4 sm:items-center lg:flex-col lg:items-start xl:flex-row xl:items-center"
-            >
+            <motion.div {...rise(4)} className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center lg:mt-8 lg:gap-4">
               <CTAButton checkout size="lg">
                 {hero.ctaPrimary}
               </CTAButton>
@@ -120,58 +191,71 @@ export default function Hero() {
                 {hero.ctaSecondary}
               </CTAButton>
             </motion.div>
+
+            {/* Etiquetas em telas menores */}
+            <motion.ul {...rise(5)} className="mt-5 flex flex-wrap gap-1.5 lg:hidden" aria-label="O que está incluso">
+              {hero.tags.map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-[var(--radius-sm)] border border-glow-black/10 bg-glow-white/75 px-3 py-1.5 font-sans text-[0.56rem] uppercase tracking-[0.2em] text-glow-black/70"
+                >
+                  {tag}
+                </li>
+              ))}
+            </motion.ul>
           </motion.div>
 
-          {/* Coluna do livro */}
-          <motion.div
-            style={{ y: reduce ? 0 : bookY }}
-            className="relative flex justify-center lg:justify-end lg:pr-12 xl:pr-24"
-          >
-            <div className="relative flex flex-col items-center">
-              {hero.tags.map((tag, i) => (
-                <Parallax
-                  key={tag}
-                  speed={tagPositions[i].speed}
-                  range={300}
-                  className={`absolute z-20 hidden xl:block ${tagPositions[i].className}`}
-                >
-                  <motion.span
-                    initial={reduce ? false : { opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: EASE, delay: 0.9 + i * 0.15 }}
-                    className="inline-block whitespace-nowrap rounded-[var(--radius-sm)] border border-glow-black/10 bg-glow-white/85 px-4 py-2 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-glow-black/75 shadow-[var(--shadow-softer)] backdrop-blur-sm"
-                  >
-                    {tag}
-                  </motion.span>
-                </Parallax>
-              ))}
-
-              <BookMockup
-                priority
-                className="w-[130px] sm:w-[220px] md:w-[280px] lg:w-[250px] xl:w-[340px] 2xl:w-[400px]"
-                sizes="(min-width: 1536px) 400px, (min-width: 1280px) 340px, (min-width: 1024px) 250px, (min-width: 768px) 280px, (min-width: 640px) 220px, 150px"
+          {/* Retrato com camadas (desktop) */}
+          <motion.div {...rise(2)} className="relative hidden justify-center lg:flex xl:justify-end xl:pr-10">
+            <motion.div style={{ y: reduce ? 0 : portraitY }} className="relative w-[min(42vw,460px)] xl:w-[min(36vw,480px)]">
+              {/* Moldura fina em outra profundidade */}
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-4 rounded-[calc(var(--radius-card)+8px)] border border-glow-terracotta/40"
+                style={{ x: reduce ? 0 : frameX, y: reduce ? 0 : frameY }}
               />
+              {portrait}
 
-              <ul className="mt-4 flex flex-wrap justify-center gap-1.5 xl:hidden" aria-label="O que está incluso">
-                {hero.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-[var(--radius-sm)] border border-glow-black/10 bg-glow-white/75 px-3 py-1.5 font-sans text-[0.56rem] uppercase tracking-[0.2em] text-glow-black/70"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {hero.tags.map((tag, i) => (
+                <FloatingTag key={tag} label={tag} className={tags[i].className} depth={tags[i].depth} sx={sx} sy={sy} delay={0.9 + i * 0.15} reduce={!!reduce} />
+              ))}
+            </motion.div>
           </motion.div>
         </div>
 
         {/* Scroll indicator */}
-        <motion.div {...rise(6)} className="mt-4 flex items-center gap-4 lg:mt-0 lg:pl-16">
+        <motion.div {...rise(6)} className="mt-4 hidden items-center gap-4 sm:flex lg:mt-0 lg:pl-16">
           <span className="font-sans text-[0.6rem] uppercase tracking-[0.34em] text-glow-black/50">{hero.scrollHint}</span>
           <ArrowDown className="animate-glow-float h-3.5 w-3.5 text-glow-terracotta" strokeWidth={1.5} aria-hidden="true" />
         </motion.div>
       </div>
     </section>
+  );
+}
+
+interface TagProps {
+  label: string;
+  className: string;
+  depth: number;
+  sx: ReturnType<typeof useSpring>;
+  sy: ReturnType<typeof useSpring>;
+  delay: number;
+  reduce: boolean;
+}
+
+function FloatingTag({ label, className, depth, sx, sy, delay, reduce }: TagProps) {
+  const x = useTransform(sx, (v) => v * 14 * depth);
+  const y = useTransform(sy, (v) => v * 10 * depth);
+  return (
+    <motion.div aria-hidden="true" className={`pointer-events-none absolute z-20 ${className}`} style={{ x: reduce ? 0 : x, y: reduce ? 0 : y }}>
+      <motion.span
+        initial={reduce ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: EASE, delay }}
+        className="inline-block whitespace-nowrap rounded-[var(--radius-sm)] border border-glow-black/10 bg-glow-white/90 px-4 py-2 font-sans text-[0.62rem] uppercase tracking-[0.24em] text-glow-black/80 shadow-[var(--shadow-softer)]"
+      >
+        {label}
+      </motion.span>
+    </motion.div>
   );
 }

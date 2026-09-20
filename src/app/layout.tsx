@@ -19,7 +19,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const TITLE = "Glow Finances — Seu dinheiro também precisa de skincare";
+const TITLE = "Glow Finances | Seu dinheiro também precisa de skincare";
 const DESCRIPTION =
   "Aprenda a entender dinheiro e investimentos de uma forma simples, prática e conectada ao universo da beleza com o Método Glow Finances.";
 

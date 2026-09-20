@@ -2,7 +2,6 @@ import Hero from "@/components/Hero";
 import DiagnosisSection from "@/components/DiagnosisSection";
 import MethodSection from "@/components/MethodSection";
 import GlossarySection from "@/components/GlossarySection";
-import ContentSection from "@/components/ContentSection";
 import BonusSection from "@/components/BonusSection";
 import AudienceSection from "@/components/AudienceSection";
 import AuthorSection from "@/components/AuthorSection";
@@ -23,7 +22,6 @@ export default function Page() {
         <DiagnosisSection />
         <MethodSection />
         <GlossarySection />
-        <ContentSection />
         <BonusSection />
         <AudienceSection />
         <AuthorSection />

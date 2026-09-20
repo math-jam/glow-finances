@@ -25,7 +25,7 @@ export default function GlossarySection() {
           {/* Texto + logo */}
           <div>
             <Reveal index={0} as="p" className="eyebrow mb-5 text-glow-beige/80">
-              04 — {glossary.eyebrow}
+              04 · {glossary.eyebrow}
             </Reveal>
             <Reveal index={1}>
               <h2 id="finances-title" className="text-display text-[clamp(2rem,4.4vw,3.4rem)]">
@@ -38,7 +38,7 @@ export default function GlossarySection() {
               {glossary.note}
             </Reveal>
 
-            {/* Logo: compacto + pincel — o conceito beleza × finanças */}
+            {/* Logo compacto + pincel: o conceito beleza × finanças */}
             <Reveal index={3} variants={scaleIn} className="mt-7 hidden items-center gap-5 lg:flex">
               <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] ring-1 ring-glow-cream/10 xl:h-36 xl:w-36">
                 <Image src={logos.compact.src} alt={logos.compact.alt} fill sizes="144px" className="object-cover" />
@@ -49,7 +49,7 @@ export default function GlossarySection() {
             </Reveal>
 
             <Reveal index={4} className="mt-8 hidden lg:block">
-              <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="conteudo">
+              <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="bonus">
                 {glossary.cta}
               </CTAButton>
             </Reveal>
@@ -86,7 +86,7 @@ export default function GlossarySection() {
         </div>
 
         <Reveal index={4} className="mt-6 lg:hidden">
-          <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="conteudo">
+          <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="bonus">
             {glossary.cta}
           </CTAButton>
         </Reveal>
