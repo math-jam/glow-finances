@@ -2,42 +2,53 @@
 
 import { useEffect, useState } from "react";
 import { offer } from "@/data/glowFinances";
-import { OFFER_END_DATE } from "@/lib/checkout";
+import { OFFER_DURATION_MINUTES, OFFER_END_STORAGE_KEY } from "@/lib/checkout";
 
 interface Remaining {
-  days: number;
-  hours: number;
   minutes: number;
   seconds: number;
   ended: boolean;
 }
 
-function computeRemaining(endIso: string, now = Date.now()): Remaining {
-  const end = new Date(endIso).getTime();
-  const diff = Math.max(0, end - now);
-  const ended = Number.isNaN(end) || diff <= 0;
+function computeRemaining(endMs: number, now = Date.now()): Remaining {
+  const diff = Math.max(0, endMs - now);
   const total = Math.floor(diff / 1000);
   return {
-    days: Math.floor(total / 86400),
-    hours: Math.floor((total % 86400) / 3600),
-    minutes: Math.floor((total % 3600) / 60),
+    minutes: Math.floor(total / 60),
     seconds: total % 60,
-    ended,
+    ended: diff <= 0,
   };
+}
+
+/**
+ * Lê o fim da oferta salvo no navegador. Se não existir (primeira visita),
+ * cria um novo prazo de OFFER_DURATION_MINUTES a partir de agora.
+ */
+function loadOrCreateEnd(): number {
+  const fresh = Date.now() + OFFER_DURATION_MINUTES * 60 * 1000;
+  try {
+    const stored = Number(window.localStorage.getItem(OFFER_END_STORAGE_KEY));
+    if (Number.isFinite(stored) && stored > 0) return stored;
+    window.localStorage.setItem(OFFER_END_STORAGE_KEY, String(fresh));
+  } catch {
+    /* localStorage indisponível — usa o prazo em memória */
+  }
+  return fresh;
 }
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /**
- * Timer de urgência baseado em uma data ABSOLUTA (OFFER_END_DATE).
- * Por depender de uma data fixa, ele persiste após refresh, zera corretamente
- * e nunca reinicia sozinho. Ao terminar, mostra o estado final.
+ * Timer de urgência de OFFER_DURATION_MINUTES por visitante.
+ * O prazo é salvo no localStorage, então persiste após refresh e não reinicia
+ * sozinho. Ao terminar, mostra o estado final.
  */
 export default function UrgencyTimer({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const [remaining, setRemaining] = useState<Remaining | null>(null);
 
   useEffect(() => {
-    const tick = () => setRemaining(computeRemaining(OFFER_END_DATE));
+    const end = loadOrCreateEnd();
+    const tick = () => setRemaining(computeRemaining(end));
     tick();
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
@@ -56,14 +67,12 @@ export default function UrgencyTimer({ tone = "dark" }: { tone?: "dark" | "light
   }
 
   const blocks = [
-    { value: remaining ? pad(remaining.days) : "--", label: "dias" },
-    { value: remaining ? pad(remaining.hours) : "--", label: "horas" },
     { value: remaining ? pad(remaining.minutes) : "--", label: "min" },
     { value: remaining ? pad(remaining.seconds) : "--", label: "seg" },
   ];
 
   const readable = remaining
-    ? `${remaining.days} dias, ${remaining.hours} horas, ${remaining.minutes} minutos e ${remaining.seconds} segundos`
+    ? `${remaining.minutes} minutos e ${remaining.seconds} segundos`
     : "calculando";
 
   return (

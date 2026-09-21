@@ -27,7 +27,7 @@ export const commercial = {
   /** Preço atual. Ex.: "R$ 97" */
   price: "R$ 97,00",
   /** Preço anterior (riscado). Deixe "" se não existir. */
-  previousPrice: "",
+  previousPrice: "R$ 197,00",
   /** Texto abaixo do preço. Ex.: "ou 12x de R$ 9,70". Deixe "" se não existir. */
   installments: "",
   /** Selos abaixo do CTA — baseados na entrega informada pela autora (Kiwify). */

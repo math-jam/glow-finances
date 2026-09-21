@@ -5,8 +5,14 @@
  */
 export const CHECKOUT_URL = "https://SEU-CHECKOUT-AQUI";
 
-/** Deadline da oferta especial (ISO 8601 com fuso). Nunca é reiniciado. */
-export const OFFER_END_DATE = "2026-12-31T23:59:59-03:00";
+/**
+ * Duração da oferta especial, em minutos, contada a partir da primeira visita.
+ * O prazo é salvo no navegador (localStorage) para persistir após refresh.
+ */
+export const OFFER_DURATION_MINUTES = 30;
+
+/** Chave usada no localStorage para guardar o fim da oferta do visitante. */
+export const OFFER_END_STORAGE_KEY = "glow-offer-end";
 
 const UTM_KEYS = [
   "utm_source",

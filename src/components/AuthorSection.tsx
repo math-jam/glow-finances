@@ -6,6 +6,7 @@ import { scaleIn } from "@/lib/animations";
 import CTAButton from "./CTAButton";
 import Parallax from "./Parallax";
 import Reveal from "./Reveal";
+import MobilePhotoBackdrop from "./MobilePhotoBackdrop";
 
 export default function AuthorSection() {
   const bioIsPlaceholder = author.bio.startsWith("[");
@@ -14,20 +15,23 @@ export default function AuthorSection() {
     <section
       id="autora"
       aria-labelledby="autora-title"
-      className="snap-section flex flex-col overflow-hidden bg-glow-beige/60"
+      className="snap-section flex flex-col overflow-hidden bg-[#E5D6CC]"
     >
+      {/* Mobile: foto da autora como fundo, desaparecendo para baixo, com parallax */}
+      <MobilePhotoBackdrop src="/images/fernanda.jpeg" position="50% 0%" fadeColor="#E5D6CC" heightClass="h-[72svh]" sharpUntil={0.55} />
+
       <Parallax speed={0.14} className="pointer-events-none absolute left-[-6%] bottom-[-14%] hidden lg:block">
         <div className="h-[400px] w-[400px] rounded-full bg-glow-cream/70 blur-3xl" />
       </Parallax>
 
-      <div className="container-glow relative flex flex-1 flex-col justify-center py-7 lg:py-10 lg:pl-24">
+      <div className="container-glow relative flex flex-1 flex-col justify-end pb-[72px] pt-[40svh] lg:justify-center lg:py-10 lg:pl-24">
         <div className="grid items-center gap-6 lg:grid-cols-[42fr_58fr] lg:gap-16">
-          {/* Foto real da autora */}
-          <div className="relative mx-auto w-full max-w-[190px] sm:max-w-[300px] lg:mx-0 lg:max-w-[min(400px,58vh)]">
+          {/* Foto real da autora (desktop) */}
+          <div className="relative mx-auto hidden w-full max-w-[min(400px,58vh)] lg:mx-0 lg:block">
             <Reveal variants={scaleIn} className="relative overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)]">
               <Parallax speed={-0.08} range={260} className="relative aspect-[4/5]">
                 <Image
-                  src="/images/author.webp"
+                  src="/images/fernanda.jpeg"
                   alt={`${author.name}, autora do Glow Finances`}
                   fill
                   sizes="(min-width: 1024px) 36vw, 90vw"
@@ -41,9 +45,9 @@ export default function AuthorSection() {
             </Reveal>
           </div>
 
-          {/* Texto */}
-          <div className="max-w-xl">
-            <Reveal index={0} as="p" className="eyebrow mb-6 text-glow-terracotta">
+          {/* Texto (no mobile, com fundo em degradê para ler bem sobre a foto) */}
+          <div className="-mx-5 max-w-xl px-5 pt-14 [background:linear-gradient(180deg,rgba(229,214,204,0)_0px,#E5D6CC_56px)] lg:mx-0 lg:px-0 lg:pt-0 lg:[background:none]">
+            <Reveal index={0} as="p" className="eyebrow mb-4 text-glow-terracotta lg:mb-6">
               06 · {author.eyebrow}
             </Reveal>
             <Reveal index={1}>
@@ -58,7 +62,7 @@ export default function AuthorSection() {
               {author.role}
             </Reveal>
 
-            <Reveal index={2} className="mt-6">
+            <Reveal index={2} className="mt-4 lg:mt-6">
               {bioIsPlaceholder ? (
                 /* Estrutura pronta para receber a biografia real */
                 <p className="rounded-[var(--radius-sm)] border border-dashed border-glow-black/25 bg-glow-cream/60 p-5 font-sans text-sm leading-relaxed text-glow-black/60">
@@ -76,7 +80,7 @@ export default function AuthorSection() {
               </p>
             </Reveal>
 
-            <Reveal index={4} className="mt-8">
+            <Reveal index={4} className="mt-6 lg:mt-8">
               <CTAButton variant="secondary" icon="down" scrollTo="faq">
                 {author.cta}
               </CTAButton>

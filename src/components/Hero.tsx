@@ -7,6 +7,7 @@ import { useCallback, useRef } from "react";
 import { hero, logos, product } from "@/data/glowFinances";
 import { EASE } from "@/lib/animations";
 import CTAButton from "./CTAButton";
+import MobilePhotoBackdrop from "./MobilePhotoBackdrop";
 
 /* Etiquetas ao redor do retrato, cada uma em uma "profundidade" diferente. */
 const tags = [
@@ -23,7 +24,6 @@ export default function Hero() {
   /* Parallax de scroll */
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, 90]);
-  const mobilePhotoY = useTransform(scrollYProgress, [0, 1], [0, 140]);
   const ambientY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -50]);
 
@@ -87,38 +87,8 @@ export default function Hero() {
       onPointerLeave={onPointerLeave}
       className="snap-section flex flex-col overflow-hidden bg-glow-cream"
     >
-      {/* Mobile: foto preenchendo o topo inteiro, desfocando e fundindo com o fundo para baixo */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[62svh] lg:hidden"
-        style={{ y: reduce ? 0 : mobilePhotoY }}
-      >
-        {/* Camada nítida (some a partir da metade) */}
-        <div
-          className="absolute inset-0"
-          style={{
-            maskImage: "linear-gradient(180deg, #000 0%, #000 42%, transparent 78%)",
-            WebkitMaskImage: "linear-gradient(180deg, #000 0%, #000 42%, transparent 78%)",
-          }}
-        >
-          <Image src="/images/hero-fernanda.webp" alt="" fill priority quality={90} sizes="100vw" className="object-cover object-[50%_0%]" />
-        </div>
-        {/* Camada desfocada (aparece na metade de baixo) */}
-        <div
-          className="absolute -inset-[6%]"
-          style={{
-            maskImage: "linear-gradient(180deg, transparent 30%, #000 55%, #000 80%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(180deg, transparent 30%, #000 55%, #000 80%, transparent 100%)",
-          }}
-        >
-          <Image src="/images/hero-fernanda.webp" alt="" fill quality={70} sizes="100vw" className="object-cover object-[50%_0%] blur-xl" />
-        </div>
-        {/* Fusão com o fundo cream */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-[55%]"
-          style={{ background: "linear-gradient(180deg, rgba(248,245,241,0) 0%, rgba(248,245,241,0.75) 55%, #F8F5F1 100%)" }}
-        />
-      </motion.div>
+      {/* Mobile: foto preenchendo o topo, desfocando e fundindo com o fundo, com parallax */}
+      <MobilePhotoBackdrop src="/images/hero-fernanda.webp" position="50% 0%" heightClass="h-[64svh]" sharpUntil={0.46} priority />
 
       {/* Desktop: fundo ambiente, a mesma foto desfocada e suave, em outra profundidade */}
       <motion.div
@@ -161,7 +131,10 @@ export default function Hero() {
         <div className="flex flex-1 flex-col justify-end pt-[30svh] lg:grid lg:grid-cols-[48fr_52fr] lg:items-center lg:gap-8 lg:pl-16 lg:pt-0">
 
           {/* Texto */}
-          <motion.div style={{ y: reduce ? 0 : textY }} className="relative z-10 max-w-xl">
+          <motion.div
+            style={{ y: reduce ? 0 : textY }}
+            className="relative z-10 -mx-5 max-w-xl px-5 pt-12 [background:linear-gradient(180deg,rgba(248,245,241,0)_0px,#F8F5F1_48px)] lg:mx-0 lg:px-0 lg:pt-0 lg:[background:none]"
+          >
             <motion.p {...rise(1)} className="eyebrow mb-4 text-glow-terracotta lg:mb-5">
               {hero.eyebrow}
             </motion.p>

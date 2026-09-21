@@ -13,8 +13,21 @@ import UrgencyTimer from "./UrgencyTimer";
 
 const badgeIcons = [Lock, ShieldCheck, Download];
 
+/** Converte "R$ 197,00" em 197. Retorna NaN se não houver número. */
+const parsePrice = (value: string) =>
+  Number(value.replace(/[^\d,.]/g, "").replace(/\./g, "").replace(",", "."));
+
+/** Percentual de desconto arredondado, ou null se não for possível calcular. */
+function computeDiscount(previous: string, current: string): number | null {
+  const from = parsePrice(previous);
+  const to = parsePrice(current);
+  if (!Number.isFinite(from) || !Number.isFinite(to) || from <= to) return null;
+  return Math.round((1 - to / from) * 100);
+}
+
 export default function OfferSection() {
   const hasPrevious = commercial.previousPrice.trim() !== "";
+  const discount = hasPrevious ? computeDiscount(commercial.previousPrice, commercial.price) : null;
 
   return (
     <section
@@ -102,12 +115,19 @@ export default function OfferSection() {
 
               <div className="mt-2.5 flex flex-wrap items-end gap-x-4 gap-y-1 border-t border-glow-black/10 pt-2.5 sm:mt-4 sm:pt-4">
                 {hasPrevious && (
-                  <span className="font-sans text-sm text-glow-black/45 line-through">
-                    <span className="sr-only">De </span>
-                    {commercial.previousPrice}
+                  <span className="flex w-full items-center gap-2.5">
+                    <span className="font-sans text-base text-glow-black/45 line-through sm:text-lg">
+                      <span className="sr-only">De </span>
+                      {commercial.previousPrice}
+                    </span>
+                    {discount !== null && (
+                      <span className="rounded-[var(--radius-pill)] bg-glow-terracotta px-2.5 py-0.5 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-glow-cream">
+                        {discount}% off
+                      </span>
+                    )}
                   </span>
                 )}
-                <span className="font-serif text-[1.75rem] leading-none text-glow-black sm:text-4xl">
+                <span className="font-serif text-[2.75rem] leading-none text-glow-terracotta sm:text-6xl">
                   <span className="sr-only">Por </span>
                   {commercial.price}
                 </span>
