@@ -55,22 +55,22 @@ export const logos = {
 
 export type SectionId =
   | "hero"
-  | "diagnostico"
-  | "metodo"
   | "finances"
+  | "metodo"
   | "bonus"
   | "para-quem"
+  | "proximo-passo"
   | "autora"
   | "faq"
   | "oferta";
 
 export const sections: { id: SectionId; label: string }[] = [
   { id: "hero", label: "Início" },
-  { id: "diagnostico", label: "Diagnóstico" },
-  { id: "metodo", label: "O método" },
   { id: "finances", label: "Traduzindo o financês" },
+  { id: "metodo", label: "O método" },
   { id: "bonus", label: "Bônus" },
   { id: "para-quem", label: "Para quem é" },
+  { id: "proximo-passo", label: "O seu próximo passo" },
   { id: "autora", label: "Autora" },
   { id: "faq", label: "Perguntas" },
   { id: "oferta", label: "Oferta" },
@@ -79,23 +79,11 @@ export const sections: { id: SectionId; label: string }[] = [
 export const hero = {
   eyebrow: product.method,
   headline: ["Seu dinheiro também", "precisa de skincare."],
-  subheadline: "O guia prático para mulheres que querem cuidar do dinheiro e construir liberdade, sem precisar falar “financês”.",
+  subheadline: "Você já aprendeu a cuidar da pele, do cabelo e da beleza. Agora é hora de aprender a cuidar do seu dinheiro, começando do zero, sem complicação e sem “financês”.",
   ctaPrimary: "Quero começar",
   ctaSecondary: "Ver como funciona",
   scrollHint: "Role para descobrir",
-  tags: ["Ebook · 34 capítulos", "Planilha financeira", "Vídeos explicativos", "Plano de 30 dias"],
-};
-
-// Capítulo 2 — Diagnóstico Inicial (perguntas reais do ebook)
-export const diagnosis = {
-  headline: ["Antes de investir,", "olhe para o seu dinheiro."],
-  questions: [
-    "Você sabe quanto custa um mês da sua vida?",
-    "Sem renda, por quanto tempo você se manteria?",
-    "Com que frequência você compra por impulso?",
-  ],
-  closing: "Talvez você não precise de mais dinheiro. Talvez precise cuidar melhor do que já tem.",
-  cta: "Ver o método",
+  tags: ["Livro digital", "Planilha financeira", "Vídeos explicativos", "Plano de 30 dias"],
 };
 
 // Capítulos 3 e 4 — o problema e a rotina de skincare do dinheiro
@@ -108,13 +96,13 @@ export const method = {
     { number: "03", skin: "Tratar", money: "Investir", detail: "Entender Selic, CDI, CDB, Tesouro, ações e FIIs." },
     { number: "04", skin: "Proteger", money: "Construir patrimônio", detail: "Plano de 1, 5 e 10 anos e uma rotina que se repete." },
   ],
-  cta: "Traduzir o financês",
+  cta: "Ver o bônus",
 };
 
 // "Traduzindo o Financês" — glossário real do ebook
 export const glossary = {
   eyebrow: "Traduzindo o Financês",
-  headline: ["Não é um idioma difícil.", "Só explicaram errado."],
+  headline: ["Talvez investir nunca tenha sido difícil.", "Só faltava alguém explicar na sua língua."],
   columns: { from: "Financês", to: "Português" },
   terms: [
     { term: "CDB", jargon: "Certificado de Depósito Bancário.", plain: "Você empresta dinheiro para o banco e recebe juros." },
@@ -123,7 +111,7 @@ export const glossary = {
     { term: "Inflação", jargon: "Aumento geral dos preços ao longo do tempo.", plain: "Seu dinheiro comprando cada vez menos, mesmo sendo o mesmo número." },
   ],
   note: "Cada capítulo traduz um termo assim, com analogias do universo da beleza.",
-  cta: "Ver o bônus",
+  cta: "Ver o método",
 };
 
 /**
@@ -141,22 +129,24 @@ export const bonus = {
 };
 
 export const audience = {
-  headline: "Talvez seja exatamente o que estava faltando.",
+  headline: ["Para quem quer parar de adiar", "e finalmente começar a investir."],
+  photo: { src: "/images/fernanda-cutout.webp", alt: "Fernanda Oliveira, de pé, consultando um tablet" },
   forYou: {
-    title: "É para você se",
+    title: "Para quem é",
     items: [
-      "Nunca soube por onde começar a investir.",
-      "Se sente perdida com termos financeiros.",
-      "Quer entender antes de investir.",
-      "Pensa no longo prazo.",
+      "Pra quem cansou de deixar o dinheiro pra depois.",
+      "Pra quem quer trocar “preciso começar” por “eu comecei”.",
+      "Pra quem quer saber o que fazer com o próprio dinheiro.",
+      "Pra quem quer investir sem fazer disso um bicho de sete cabeças.",
     ],
   },
   notForYou: {
-    title: "Não é para você se",
+    title: "Para quem não é",
     items: [
-      "Procura enriquecimento rápido.",
-      "Quer uma fórmula mágica.",
-      "Quer promessa de rentabilidade.",
+      "Pra quem procura dinheiro fácil.",
+      "Pra quem espera uma fórmula mágica.",
+      "Pra quem quer resultado sem começar.",
+      "Pra quem procura promessas de rentabilidade.",
     ],
   },
   shifts: [
@@ -164,7 +154,20 @@ export const audience = {
     { from: "Ansiedade", to: "Organização" },
     { from: "Impulso", to: "Intencionalidade" },
   ],
-  cta: "Conhecer a autora",
+  cta: "O seu próximo passo",
+};
+
+// Seção 06 — fechamento antes da autora
+export const nextStep = {
+  eyebrow: "O seu próximo passo",
+  headline: ["Seu dinheiro também precisa de", "skincare."],
+  lines: ["Não é sobre saber tudo.", "É sobre entender o essencial, criar o seu plano e começar."],
+  closing: "O Glow te mostra, passo a passo, como fazer isso.",
+  // Palavras das "lombadas" no canto da cena
+  spines: ["Plano", "Disciplina", "Liberdade", "Glow"],
+  image: { src: "/images/next-step-compact.webp", alt: "Pó compacto e pincel dourados Glow Finances, com um gráfico de barras gravado no pó" },
+  cta: "Quero começar",
+  ctaSecondary: "Conhecer a autora",
 };
 
 export const author = {
@@ -173,7 +176,11 @@ export const author = {
   role: "Criadora do Glow Finances · Corretora de imóveis",
   byline: "Por Fernanda Oliveira",
   // Biografia fornecida pela autora (condensada, em primeira pessoa)
-  bio: "Aos 18 anos comprei meu primeiro terreno, e ali nasceu meu interesse por construção e patrimônio. Aos 22, fiz meu primeiro investimento em renda fixa: o primeiro rendimento despertou uma curiosidade que nunca mais parou. Desde então estudo todos os dias, entre cursos online e presenciais, aulas particulares e muita leitura. O Glow Finances é um projeto que desenvolvo sozinha, para mulheres que querem começar do zero.",
+  bio: [
+    "Aos 18 anos, comprei meu primeiro terreno e ali começou meu interesse por patrimônio. Aos 22, fiz meu primeiro investimento em renda fixa. Ver meu dinheiro render despertou uma curiosidade que nunca mais parou.",
+    "Desde então, estudar investimentos virou parte da minha rotina. O Glow Finances nasceu dessa trajetória e da vontade de tornar esse universo mais simples para mulheres que querem começar, mas ainda não sabem por onde.",
+  ],
+  photo: { src: "/images/author-mesa.webp", alt: "Fernanda Oliveira em pé, trabalhando no notebook sobre uma mesa de madeira" },
   // Trecho real do último capítulo do ebook (Capítulo 34)
   quote: "Mulheres não precisam apenas ganhar dinheiro. Precisam fazer do dinheiro um aliado na construção da vida que realmente desejam.",
   cta: "Tirar dúvidas",
@@ -198,7 +205,7 @@ export const offer = {
   timerLabel: "Oferta especial termina em",
   timerEnded: "Essa condição especial terminou.",
   cardTitle: "Glow Finances",
-  includes: ["Ebook · 34 capítulos", "Vídeos explicativos", "Método Glow Finances", "Diagnóstico, checklist e Glow Challenge", "Plano Glow de 30 dias"],
+  includes: ["Livro digital", "Vídeos explicativos", "Método Glow Finances", "Diagnóstico, checklist e Glow Challenge", "Plano Glow de 30 dias"],
   bonusLabel: "Bônus",
   bonusItem: "Planilha Financeira Glow + vídeo de uso",
   bonusItemShort: "Planilha Glow + vídeo de uso",

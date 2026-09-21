@@ -45,7 +45,7 @@ export default function OfferSection() {
           {/* Texto + timer + logo */}
           <div className="min-w-0 max-w-xl">
             <Reveal index={0} as="p" className="eyebrow mb-3 hidden text-glow-beige/70 sm:block lg:mb-5">
-              08 · Comece agora
+              09 · Comece agora
             </Reveal>
             <Reveal index={1}>
               <h2 id="oferta-title" className="text-display text-[clamp(1.55rem,5.2vw,4.2rem)]">

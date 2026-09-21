@@ -73,7 +73,7 @@ export default function Hero() {
         priority
         quality={90}
         sizes="(min-width: 1024px) 480px, 200px"
-        className="object-cover object-[50%_18%]"
+        className="object-cover object-[50%_22%]"
       />
     </motion.div>
   );
@@ -88,7 +88,7 @@ export default function Hero() {
       className="snap-section flex flex-col overflow-hidden bg-glow-cream"
     >
       {/* Mobile: foto preenchendo o topo, desfocando e fundindo com o fundo, com parallax */}
-      <MobilePhotoBackdrop src="/images/hero-fernanda.webp" position="50% 0%" heightClass="h-[64svh]" sharpUntil={0.46} priority />
+      <MobilePhotoBackdrop src="/images/hero-fernanda.webp" position="50% 8%" heightClass="h-[64svh]" sharpUntil={0.46} priority />
 
       {/* Desktop: fundo ambiente, a mesma foto desfocada e suave, em outra profundidade */}
       <motion.div
@@ -160,7 +160,7 @@ export default function Hero() {
               <CTAButton checkout size="lg">
                 {hero.ctaPrimary}
               </CTAButton>
-              <CTAButton variant="ghost" icon="down" scrollTo="diagnostico">
+              <CTAButton variant="ghost" icon="down" scrollTo="finances">
                 {hero.ctaSecondary}
               </CTAButton>
             </motion.div>

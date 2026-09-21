@@ -8,7 +8,7 @@ import { useActiveSection } from "./useActiveSection";
 export default function SectionNavigator() {
   const active = useActiveSection();
   // Seções escuras: usa tom claro para o indicador.
-  const darkIds = new Set(["diagnostico", "finances", "bonus", "oferta"]);
+  const darkIds = new Set(["finances", "bonus", "proximo-passo", "oferta"]);
   const onDark = darkIds.has(sections[active]?.id);
 
   return (

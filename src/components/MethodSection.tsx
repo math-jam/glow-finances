@@ -1,7 +1,10 @@
 "use client";
 
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { method } from "@/data/glowFinances";
+import { audience, method } from "@/data/glowFinances";
+import { EASE } from "@/lib/animations";
 import CTAButton from "./CTAButton";
 import Parallax from "./Parallax";
 import Reveal from "./Reveal";
@@ -62,6 +65,23 @@ function Bottle({ variant, label }: { variant: number; label: string }) {
   );
 }
 
+/** Mobile/tablet: a Fernanda ao fundo, à esquerda, atrás das etapas. */
+function BackdropPortrait() {
+  return (
+    <motion.div
+      aria-hidden="true"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 1.1, ease: EASE, delay: 0.15 }}
+      className="pointer-events-none absolute left-[-6%] top-[-64px] z-0 h-[min(68svh,600px)] lg:hidden"
+      style={{ maskImage: "linear-gradient(180deg, #000 55%, transparent 100%)", WebkitMaskImage: "linear-gradient(180deg, #000 55%, transparent 100%)" }}
+    >
+      <Image src={audience.photo.src} alt="" width={456} height={1280} sizes="220px" quality={85} className="relative h-full w-auto" />
+    </motion.div>
+  );
+}
+
 export default function MethodSection() {
   return (
     <section id="metodo" aria-labelledby="metodo-title" className="snap-section flex flex-col overflow-hidden bg-glow-beige">
@@ -91,15 +111,17 @@ export default function MethodSection() {
           </Reveal>
         </div>
 
-        {/* 4 etapas: Skincare → Finanças */}
-        <ol className="mt-6 grid gap-2.5 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4 lg:gap-4" aria-label="As 4 etapas do método">
+        {/* 4 etapas: Skincare → Finanças (no mobile, sobre a foto ao fundo) */}
+        <div className="relative mt-[72px] lg:mt-10">
+        <BackdropPortrait />
+        <ol className="relative grid gap-2.5 pl-[18%] sm:grid-cols-2 sm:pl-[14%] lg:grid-cols-4 lg:gap-4 lg:pl-0" aria-label="As 4 etapas do método">
           {method.steps.map((step, i) => (
             <Reveal
               key={step.number}
               as="li"
               index={i}
               amount={0.2}
-              className="flex items-center gap-4 rounded-[var(--radius-card)] border border-glow-brown/10 bg-glow-cream/60 px-4 py-3 transition-all sm:p-4 duration-500 ease-[var(--ease-glow)] hover:-translate-y-[5px] hover:bg-glow-cream hover:shadow-[var(--shadow-soft)] lg:flex-col lg:items-start lg:gap-5 lg:p-5"
+              className="flex items-center gap-4 rounded-[var(--radius-card)] border border-glow-brown/10 bg-glow-cream/35 px-4 py-3 backdrop-blur-[3px] transition-all sm:p-4 duration-500 ease-[var(--ease-glow)] hover:-translate-y-[5px] hover:bg-glow-cream hover:shadow-[var(--shadow-soft)] lg:flex-col lg:items-start lg:gap-5 lg:bg-glow-cream/60 lg:p-5 lg:backdrop-blur-none"
             >
               <div className="hidden shrink-0 items-end sm:flex lg:h-36 xl:h-40">
                 <Bottle variant={i} label={step.skin} />
@@ -116,9 +138,10 @@ export default function MethodSection() {
             </Reveal>
           ))}
         </ol>
+        </div>
 
         <Reveal index={5} className="mt-6 lg:mt-8">
-          <CTAButton icon="down" scrollTo="finances">
+          <CTAButton icon="down" scrollTo="bonus">
             {method.cta}
           </CTAButton>
         </Reveal>

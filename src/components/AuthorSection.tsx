@@ -9,8 +9,6 @@ import Reveal from "./Reveal";
 import MobilePhotoBackdrop from "./MobilePhotoBackdrop";
 
 export default function AuthorSection() {
-  const bioIsPlaceholder = author.bio.startsWith("[");
-
   return (
     <section
       id="autora"
@@ -18,7 +16,7 @@ export default function AuthorSection() {
       className="snap-section flex flex-col overflow-hidden bg-[#E5D6CC]"
     >
       {/* Mobile: foto da autora como fundo, desaparecendo para baixo, com parallax */}
-      <MobilePhotoBackdrop src="/images/fernanda.jpeg" position="50% 0%" fadeColor="#E5D6CC" heightClass="h-[72svh]" sharpUntil={0.55} />
+      <MobilePhotoBackdrop src={author.photo.src} position="50% 22%" fadeColor="#E5D6CC" heightClass="h-[72svh]" sharpUntil={0.55} />
 
       <Parallax speed={0.14} className="pointer-events-none absolute left-[-6%] bottom-[-14%] hidden lg:block">
         <div className="h-[400px] w-[400px] rounded-full bg-glow-cream/70 blur-3xl" />
@@ -31,11 +29,11 @@ export default function AuthorSection() {
             <Reveal variants={scaleIn} className="relative overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)]">
               <Parallax speed={-0.08} range={260} className="relative aspect-[4/5]">
                 <Image
-                  src="/images/fernanda.jpeg"
-                  alt={`${author.name}, autora do Glow Finances`}
+                  src={author.photo.src}
+                  alt={author.photo.alt}
                   fill
                   sizes="(min-width: 1024px) 36vw, 90vw"
-                  className="scale-[1.12] object-cover object-[50%_30%]"
+                  className="scale-[1.12] object-cover object-[50%_32%]"
                 />
               </Parallax>
             </Reveal>
@@ -48,7 +46,7 @@ export default function AuthorSection() {
           {/* Texto (no mobile, com fundo em degradê para ler bem sobre a foto) */}
           <div className="-mx-5 max-w-xl px-5 pt-14 [background:linear-gradient(180deg,rgba(229,214,204,0)_0px,#E5D6CC_56px)] lg:mx-0 lg:px-0 lg:pt-0 lg:[background:none]">
             <Reveal index={0} as="p" className="eyebrow mb-4 text-glow-terracotta lg:mb-6">
-              06 · {author.eyebrow}
+              07 · {author.eyebrow}
             </Reveal>
             <Reveal index={1}>
               <h2
@@ -62,15 +60,12 @@ export default function AuthorSection() {
               {author.role}
             </Reveal>
 
-            <Reveal index={2} className="mt-4 lg:mt-6">
-              {bioIsPlaceholder ? (
-                /* Estrutura pronta para receber a biografia real */
-                <p className="rounded-[var(--radius-sm)] border border-dashed border-glow-black/25 bg-glow-cream/60 p-5 font-sans text-sm leading-relaxed text-glow-black/60">
-                  {author.bio}
+            <Reveal index={2} className="mt-4 flex max-w-lg flex-col gap-3 lg:mt-6">
+              {author.bio.map((paragraph) => (
+                <p key={paragraph} className="font-sans text-[0.88rem] font-light leading-relaxed text-glow-black/75 sm:text-base">
+                  {paragraph}
                 </p>
-              ) : (
-                <p className="max-w-lg font-sans text-[0.88rem] font-light leading-relaxed text-glow-black/75 sm:text-base">{author.bio}</p>
-              )}
+              ))}
             </Reveal>
 
             <Reveal index={3} className="mt-7 hidden border-l-2 border-glow-terracotta/60 pl-5 sm:block">

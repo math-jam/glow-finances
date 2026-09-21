@@ -67,7 +67,7 @@ export default function StickyCTA() {
               </p>
               <p className="whitespace-nowrap font-sans text-[0.58rem] uppercase tracking-[0.18em] text-glow-black/50 lg:text-[0.62rem] lg:tracking-[0.24em]">
                 <span className="sm:hidden">+ Planilha bônus</span>
-                <span className="hidden sm:inline">Ebook · 34 capítulos · Planilha</span>
+                <span className="hidden sm:inline">Livro digital · Planilha</span>
               </p>
             </div>
             <CTAButton checkout size="md" className="shrink-0 px-5! sm:px-7!">

@@ -25,7 +25,7 @@ export default function GlossarySection() {
           {/* Texto + logo */}
           <div>
             <Reveal index={0} as="p" className="eyebrow mb-5 text-glow-beige/80">
-              04 · {glossary.eyebrow}
+              02 · {glossary.eyebrow}
             </Reveal>
             <Reveal index={1}>
               <h2 id="finances-title" className="text-display text-[clamp(2rem,4.4vw,3.4rem)]">
@@ -49,7 +49,7 @@ export default function GlossarySection() {
             </Reveal>
 
             <Reveal index={4} className="mt-8 hidden lg:block">
-              <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="bonus">
+              <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="metodo">
                 {glossary.cta}
               </CTAButton>
             </Reveal>
@@ -86,7 +86,7 @@ export default function GlossarySection() {
         </div>
 
         <Reveal index={4} className="mt-6 lg:hidden">
-          <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="bonus">
+          <CTAButton tone="dark" variant="secondary" icon="down" scrollTo="metodo">
             {glossary.cta}
           </CTAButton>
         </Reveal>

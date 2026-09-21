@@ -1,9 +1,9 @@
 import Hero from "@/components/Hero";
-import DiagnosisSection from "@/components/DiagnosisSection";
 import MethodSection from "@/components/MethodSection";
 import GlossarySection from "@/components/GlossarySection";
 import BonusSection from "@/components/BonusSection";
 import AudienceSection from "@/components/AudienceSection";
+import NextStepSection from "@/components/NextStepSection";
 import AuthorSection from "@/components/AuthorSection";
 import FAQ from "@/components/FAQ";
 import OfferSection from "@/components/OfferSection";
@@ -19,11 +19,11 @@ export default function Page() {
       <SectionNavigator />
       <main id="conteudo-principal">
         <Hero />
-        <DiagnosisSection />
-        <MethodSection />
         <GlossarySection />
+        <MethodSection />
         <BonusSection />
         <AudienceSection />
+        <NextStepSection />
         <AuthorSection />
         <FAQ />
         <OfferSection />
