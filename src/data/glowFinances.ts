@@ -47,6 +47,9 @@ export const logos = {
   monogram: { src: "/images/logo-monogram.png", alt: "Monograma GF, Glow Finances: finanças na sua rotina" },
   compact: { src: "/images/logo-compact.webp", alt: "Glow Finances: seu dinheiro também precisa de skincare" },
   script: { src: "/images/logo-script.webp", alt: "Glow Finances: planeje hoje, brilhe sempre" },
+  /** Recortes já enquadrados (sem precisar escalar/cortar via CSS): só o monograma GF e só o "Glow Finances" manuscrito. */
+  mark: { src: "/images/logo-monogram.png", alt: "Monograma GF, Glow Finances" },
+  wordmark: { src: "/images/logo-wordmark.webp", alt: "Glow Finances" },
 };
 
 /* ---------------------------------------------------------------- */

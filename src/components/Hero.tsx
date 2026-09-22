@@ -117,7 +117,7 @@ export default function Hero() {
         <motion.header {...rise(0)} className="flex items-center justify-between lg:pl-16">
           <span className="flex items-center gap-3">
             <span className="relative h-11 w-11 overflow-hidden rounded-full ring-1 ring-glow-black/10 sm:h-12 sm:w-12">
-              <Image src={logos.monogram.src} alt={logos.monogram.alt} fill sizes="48px" className="scale-[1.35] object-cover object-[50%_42%]" />
+              <Image src={logos.monogram.src} alt={logos.monogram.alt} fill sizes="96px" quality={90} className="object-cover" />
             </span>
             <span className="font-serif text-lg tracking-tight text-glow-black">
               Glow<span className="text-glow-terracotta">.</span>

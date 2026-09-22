@@ -62,8 +62,8 @@ export default function OfferSection() {
 
             <Reveal index={4} className="mt-7 hidden items-center gap-5 lg:flex">
               {/* Logo: "Planeje hoje. Brilhe sempre." */}
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] ring-1 ring-glow-cream/10 xl:h-28 xl:w-28">
-                <Image src={logos.script.src} alt={logos.script.alt} fill sizes="112px" className="object-cover" />
+              <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)] ring-1 ring-glow-cream/10 xl:h-28 xl:w-[168px]">
+                <Image src={logos.wordmark.src} alt={logos.wordmark.alt} fill sizes="336px" quality={90} className="object-cover" />
               </div>
               <ul className="flex flex-col gap-2" aria-label="Garantias de compra">
                 {commercial.trustBadges.map((badge, i) => {

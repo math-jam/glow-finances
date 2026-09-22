@@ -149,8 +149,8 @@ export default function NextStepSection() {
 
             {/* Assinatura Glow Finances */}
             <Reveal index={4} className="mt-8 hidden items-center gap-4 sm:flex lg:mt-12">
-              <span className="relative h-10 w-28 opacity-80">
-                <Image src={logos.script.src} alt={logos.script.alt} fill sizes="112px" className="object-contain object-left" />
+              <span className="relative h-16 w-24 overflow-hidden rounded-[var(--radius-sm)] opacity-90">
+                <Image src={logos.wordmark.src} alt={logos.wordmark.alt} fill sizes="192px" quality={90} className="object-cover" />
               </span>
               <span className="h-px w-8 bg-glow-beige/40" aria-hidden="true" />
               <span className="font-sans text-[0.58rem] uppercase tracking-[0.3em] text-glow-beige/60">Seu dinheiro também precisa de skincare.</span>
