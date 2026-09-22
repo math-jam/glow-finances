@@ -16,24 +16,24 @@ export default function AuthorSection() {
       className="snap-section flex flex-col overflow-hidden bg-[#E5D6CC]"
     >
       {/* Mobile: foto da autora como fundo, desaparecendo para baixo, com parallax */}
-      <MobilePhotoBackdrop src={author.photo.src} position="50% 22%" fadeColor="#E5D6CC" heightClass="h-[72svh]" sharpUntil={0.55} />
+      <MobilePhotoBackdrop src={author.photo.src} position="50% 30%" fadeColor="#E5D6CC" heightClass="h-[68svh]" sharpUntil={0.6} />
 
       <Parallax speed={0.14} className="pointer-events-none absolute left-[-6%] bottom-[-14%] hidden lg:block">
         <div className="h-[400px] w-[400px] rounded-full bg-glow-cream/70 blur-3xl" />
       </Parallax>
 
       <div className="container-glow relative flex flex-1 flex-col justify-end pb-[72px] pt-[40svh] lg:justify-center lg:py-10 lg:pl-24">
-        <div className="grid items-center gap-6 lg:grid-cols-[42fr_58fr] lg:gap-16">
+        <div className="grid items-center gap-6 lg:grid-cols-[48fr_52fr] lg:gap-14">
           {/* Foto real da autora (desktop) */}
-          <div className="relative mx-auto hidden w-full max-w-[min(400px,58vh)] lg:mx-0 lg:block">
+          <div className="relative mx-auto hidden w-full max-w-[min(600px,80vh)] lg:mx-0 lg:block">
             <Reveal variants={scaleIn} className="relative overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-soft)]">
-              <Parallax speed={-0.08} range={260} className="relative aspect-[4/5]">
+              <Parallax speed={-0.08} range={200} className="relative aspect-[1100/812]">
                 <Image
                   src={author.photo.src}
                   alt={author.photo.alt}
                   fill
                   sizes="(min-width: 1024px) 36vw, 90vw"
-                  className="scale-[1.12] object-cover object-[50%_32%]"
+                  className="scale-[1.08] object-cover object-[50%_40%]"
                 />
               </Parallax>
             </Reveal>
