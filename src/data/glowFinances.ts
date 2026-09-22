@@ -160,15 +160,20 @@ export const audience = {
 // Seção 06 — fechamento antes da autora
 export const nextStep = {
   eyebrow: "O seu próximo passo",
-  headline: ["Seu dinheiro também precisa de", "skincare."],
-  lines: ["Não é sobre saber tudo.", "É sobre entender o essencial, criar o seu plano e começar."],
-  closing: "O Glow te mostra, passo a passo, como fazer isso.",
-  // Palavras das "lombadas" no canto da cena
-  spines: ["Plano", "Disciplina", "Liberdade", "Glow"],
-  image: { src: "/images/next-step-compact.webp", alt: "Pó compacto e pincel dourados Glow Finances, com um gráfico de barras gravado no pó" },
+  headline: ["Seu dinheiro", "também precisa", "de", "skincare."],
+  description: "O Glow Finances é o guia prático para mulheres que querem cuidar do dinheiro e construir liberdade.",
+  // Os três pilares (os mesmos da capa do ebook)
+  features: [
+    { icon: "lipstick", label: ["Finanças", "na sua rotina"] },
+    { icon: "book", label: ["Educação", "financeira"] },
+    { icon: "chart", label: ["Investimentos", "para iniciantes"] },
+  ],
+  // Pincel dourado que compõe a cena, ao lado do livro
+  image: { src: "/images/next-step-compact.webp", alt: "" },
   cta: "Quero começar",
-  ctaSecondary: "Conhecer a autora",
-};
+  // Linha de fechamento, no rodapé da cena
+  taglines: ["Mais clareza", "Mais escolhas", "Mais você"],
+} as const;
 
 export const author = {
   eyebrow: "Por trás do Glow Finances",
@@ -180,7 +185,7 @@ export const author = {
     "Aos 18 anos, comprei meu primeiro terreno e ali começou meu interesse por patrimônio. Aos 22, fiz meu primeiro investimento em renda fixa. Ver meu dinheiro render despertou uma curiosidade que nunca mais parou.",
     "Desde então, estudar investimentos virou parte da minha rotina. O Glow Finances nasceu dessa trajetória e da vontade de tornar esse universo mais simples para mulheres que querem começar, mas ainda não sabem por onde.",
   ],
-  photo: { src: "/images/author-mesa.webp", alt: "Fernanda Oliveira em pé, trabalhando no notebook sobre uma mesa de madeira" },
+  photo: { src: "/images/fernanda-mesa-notebook.jpeg", alt: "Fernanda Oliveira em pé, debruçada sobre o notebook em uma mesa redonda de madeira" },
   // Trecho real do último capítulo do ebook (Capítulo 34)
   quote: "Mulheres não precisam apenas ganhar dinheiro. Precisam fazer do dinheiro um aliado na construção da vida que realmente desejam.",
   cta: "Tirar dúvidas",

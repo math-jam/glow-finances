@@ -5,7 +5,7 @@ import type { MouseEvent, ReactNode } from "react";
 import { CHECKOUT_URL, handleCheckout } from "@/lib/checkout";
 import { scrollToSection } from "@/lib/animations";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "accent";
 type Tone = "light" | "dark";
 
 interface Props {
@@ -41,6 +41,8 @@ const styles: Record<Tone, Record<Variant, string>> = {
     secondary:
       "bg-transparent text-glow-black border border-glow-black/25 hover:border-glow-black/60 hover:bg-glow-white/40",
     ghost: "bg-transparent text-glow-black/80 hover:text-glow-black px-2",
+    accent:
+      "bg-glow-terracotta text-glow-cream shadow-[0_14px_40px_rgba(169,103,91,0.28)] hover:bg-glow-brown hover:shadow-[0_18px_50px_rgba(41,37,34,0.24)]",
   },
   dark: {
     primary:
@@ -48,6 +50,9 @@ const styles: Record<Tone, Record<Variant, string>> = {
     secondary:
       "bg-transparent text-glow-cream border border-glow-cream/30 hover:border-glow-cream/70 hover:bg-glow-cream/10",
     ghost: "bg-transparent text-glow-cream/80 hover:text-glow-cream px-2",
+    /** Pílula rosê (beige) com texto escuro — a do "Quero começar" da seção 06. */
+    accent:
+      "bg-glow-beige text-glow-black shadow-[0_14px_40px_rgba(0,0,0,0.3)] hover:bg-[#e6d0c5] hover:shadow-[0_18px_50px_rgba(0,0,0,0.38)]",
   },
 };
 
