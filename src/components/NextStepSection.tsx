@@ -78,7 +78,7 @@ function MobileBook() {
   const reduce = useReducedMotion();
   return (
     <motion.div
-      className="absolute right-[-6%] top-1/2 z-0 aspect-[2/3] w-[50%] -translate-y-1/2 sm:right-0 sm:w-[42%] lg:hidden"
+      className="absolute right-[-2%] top-1/2 z-0 aspect-[2/3] w-[58%] -translate-y-1/2 sm:right-[2%] sm:w-[48%] lg:hidden"
       initial={reduce ? false : { opacity: 0, y: 24, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -88,7 +88,7 @@ function MobileBook() {
         className="relative h-full w-full"
         {...(reduce ? {} : { animate: { y: [0, -6, 0] }, transition: { duration: 7, ease: "easeInOut", repeat: Infinity } })}
       >
-        <BookCover sizes="50vw" />
+        <BookCover sizes="58vw" />
       </motion.div>
     </motion.div>
   );
@@ -169,7 +169,7 @@ export default function NextStepSection() {
               <Reveal
                 index={2}
                 as="p"
-                className="relative z-10 mt-4 pr-[46%] font-sans text-[0.9rem] font-light leading-relaxed text-glow-cream/85 sm:text-lg lg:mt-4 lg:max-w-md lg:pr-0"
+                className="relative z-10 mt-4 pr-[52%] font-sans text-[0.9rem] font-light leading-relaxed text-glow-cream/85 sm:text-lg lg:mt-4 lg:max-w-md lg:pr-0"
               >
                 {nextStep.description}
               </Reveal>
@@ -204,7 +204,7 @@ export default function NextStepSection() {
           <Reveal variants={scaleIn} amount={0.2} className="relative z-10 hidden w-full lg:block">
             <Parallax speed={-0.05} range={160}>
               <motion.div
-                className="relative mx-auto aspect-[2/3] h-[min(64svh,600px)]"
+                className="relative mx-auto aspect-[2/3] h-[min(74svh,680px)]"
                 {...(reduce ? {} : { animate: { y: [0, -6, 0] }, transition: { duration: 7, ease: "easeInOut", repeat: Infinity } })}
               >
                 <BookCover sizes="40vw" />

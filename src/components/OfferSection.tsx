@@ -84,8 +84,8 @@ export default function OfferSection() {
             <div className="relative w-full max-w-full rounded-[var(--radius-card)] bg-glow-cream p-3 text-glow-black shadow-[var(--shadow-deep)] sm:p-8">
               <div className="flex gap-4 sm:gap-6">
                 {/* Capa do ebook dentro do card */}
-                <div className="w-[64px] shrink-0 sm:w-[132px] lg:w-[172px]">
-                  <BookMockup className="w-full" sizes="172px" />
+                <div className="w-[76px] shrink-0 sm:w-[152px] lg:w-[200px]">
+                  <BookMockup className="w-full" sizes="200px" />
                 </div>
 
                 <div className="min-w-0 flex-1">

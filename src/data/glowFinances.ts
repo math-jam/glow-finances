@@ -178,7 +178,7 @@ export const nextStep = {
 export const author = {
   eyebrow: "Por trás do Glow Finances",
   name: "Fernanda Oliveira",
-  role: "Criadora do Glow Finances · Corretora de imóveis",
+  role: "Criadora do Glow Finances",
   byline: "Por Fernanda Oliveira",
   // Biografia fornecida pela autora (condensada, em primeira pessoa)
   bio: [
