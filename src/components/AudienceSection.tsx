@@ -79,6 +79,72 @@ function FloatingPortrait() {
   );
 }
 
+/** Mobile/tablet: a Fernanda de pé à esquerda dos cards, como na arte. */
+function MobilePortrait() {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, x: -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 1.2, ease: EASE, delay: 0.15 }}
+      className="relative w-[33%] shrink-0 self-stretch sm:w-[30%] lg:hidden"
+    >
+      {/* Luz suave atrás e sombra no "chão" */}
+      <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[10%] h-[70%] w-[160%] -translate-x-1/2 rounded-full bg-glow-beige/50 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-1/2 h-3 w-[70%] -translate-x-1/2 rounded-full bg-glow-black/15 blur-md" />
+      <motion.div
+        className="absolute inset-x-[-26%] bottom-0 top-0 sm:inset-x-[-10%]"
+        {...(reduce ? {} : { animate: { y: [0, -6, 0] }, transition: { duration: 6.4, ease: "easeInOut", repeat: Infinity } })}
+      >
+        <Image src={audience.photo.src} alt={audience.photo.alt} fill sizes="45vw" quality={90} className="object-contain object-bottom" />
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/** Card de lista com ícone redondo por item (check ou x), como na arte. */
+function ChecklistCard({
+  index,
+  title,
+  items,
+  kind,
+}: {
+  index: number;
+  title: string;
+  items: string[];
+  kind: "yes" | "no";
+}) {
+  const yes = kind === "yes";
+  const Icon = yes ? Check : X;
+  return (
+    <Reveal
+      index={index}
+      amount={0.2}
+      className={`rounded-[var(--radius-card)] border px-4 py-5 sm:px-6 sm:py-6 ${
+        yes ? "border-glow-black/8 bg-glow-white" : "border-glow-terracotta/10 bg-[#ebdfd9]"
+      }`}
+    >
+      <h3 className={`eyebrow ${yes ? "text-glow-brown/75" : "text-glow-terracotta"}`}>{title}</h3>
+      <ul className="mt-4 flex flex-col divide-y divide-glow-black/8">
+        {items.map((item) => (
+          <li key={item} className="flex items-center gap-3 py-3 first:pt-1 last:pb-0 sm:gap-4">
+            <span
+              className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full sm:h-9 sm:w-9 ${
+                yes ? "bg-[#e6e3dc] text-glow-olive" : "bg-[#e3ccc4] text-glow-terracotta"
+              }`}
+              aria-hidden="true"
+            >
+              <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2} />
+            </span>
+            <span className={`font-serif text-[1rem] leading-snug sm:text-[1.15rem] ${yes ? "text-glow-black" : "text-glow-black/85"}`}>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
+  );
+}
+
 export default function AudienceSection() {
   return (
     <section id="para-quem" aria-labelledby="para-quem-title" className="snap-section flex flex-col overflow-hidden bg-glow-cream">
@@ -89,7 +155,7 @@ export default function AudienceSection() {
         <div className="h-[360px] w-[360px] rounded-full border border-glow-brown/10" />
       </Parallax>
 
-      <div className="container-glow relative flex flex-1 flex-col justify-center py-7 lg:py-10 lg:pl-24">
+      <div className="container-glow relative flex flex-1 flex-col justify-center pb-28 pt-8 lg:py-10 lg:pl-24">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(240px,30%)] lg:items-center lg:gap-10 xl:gap-16">
           {/* Texto + cards */}
           <div>
@@ -97,53 +163,24 @@ export default function AudienceSection() {
               05 · Para quem é
             </Reveal>
             <Reveal index={1}>
-              <h2 id="para-quem-title" className="text-display max-w-3xl text-[clamp(2rem,4.4vw,3.4rem)] text-glow-black">
+              <h2 id="para-quem-title" className="text-display max-w-3xl text-[clamp(2.1rem,4.4vw,3.4rem)] text-glow-black">
                 {audience.headline[0]}
                 <br />
-                <em className="italic text-glow-brown">{audience.headline[1]}</em>
+                {audience.headline[1]}
               </h2>
             </Reveal>
 
-            <div className="mt-6 lg:mt-9">
-              <div className="grid gap-3 sm:grid-cols-2 lg:gap-5">
-              <Reveal index={2} amount={0.2} className="rounded-[var(--radius-card)] border border-glow-black/10 bg-glow-white p-6 sm:p-7">
-                <h3 className="eyebrow flex items-center gap-3 text-glow-olive">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-glow-olive text-glow-cream">
-                    <Check className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
-                  </span>
-                  {audience.forYou.title}
-                </h3>
-                <ul className="mt-5 flex flex-col divide-y divide-glow-black/8">
-                  {audience.forYou.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                      <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-glow-olive" aria-hidden="true" />
-                      <span className="font-serif text-[1.02rem] leading-snug text-glow-black sm:text-[1.1rem]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal index={3} amount={0.2} className="rounded-[var(--radius-card)] border border-glow-black/10 bg-glow-beige/40 p-6 sm:p-7">
-                <h3 className="eyebrow flex items-center gap-3 text-glow-terracotta">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-glow-terracotta text-glow-cream">
-                    <X className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
-                  </span>
-                  {audience.notForYou.title}
-                </h3>
-                <ul className="mt-5 flex flex-col divide-y divide-glow-black/8">
-                  {audience.notForYou.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                      <span className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-glow-terracotta" aria-hidden="true" />
-                      <span className="font-serif text-[1.02rem] leading-snug text-glow-black/80 sm:text-[1.1rem]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+            {/* No mobile/tablet: foto à esquerda, cards à direita. No desktop, a foto vai para a coluna ao lado. */}
+            <div className="mt-5 flex items-stretch gap-2 sm:gap-5 lg:mt-9 lg:block">
+              <MobilePortrait />
+              <div className="relative z-10 grid min-w-0 flex-1 gap-3 lg:grid-cols-2 lg:gap-5">
+                <ChecklistCard index={2} title={audience.forYou.title} items={audience.forYou.items} kind="yes" />
+                <ChecklistCard index={3} title={audience.notForYou.title} items={audience.notForYou.items} kind="no" />
               </div>
             </div>
 
             <Reveal index={4} className="mt-6 lg:mt-8">
-              <ContinueButton to="proximo-passo" label={audience.cta} />
+              <ContinueButton to="autora" label={audience.cta} />
             </Reveal>
           </div>
 

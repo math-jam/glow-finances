@@ -1,9 +1,9 @@
 /**
  * Configuração central do checkout.
- * Troque CHECKOUT_URL pela URL real da plataforma de pagamento.
+ * Checkout real do ebook na Kiwify.
  * Todos os CTAs da página passam por handleCheckout().
  */
-export const CHECKOUT_URL = "https://SEU-CHECKOUT-AQUI";
+export const CHECKOUT_URL = "https://pay.kiwify.com.br/aIuJTjh";
 
 /**
  * Duração da oferta especial, em minutos, contada a partir da primeira visita.

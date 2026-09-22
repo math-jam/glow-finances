@@ -88,7 +88,7 @@ export const hero = {
 
 // Capítulos 3 e 4 — o problema e a rotina de skincare do dinheiro
 export const method = {
-  headline: ["Você não é ruim com dinheiro.", "Só ensinaram você errado."],
+  headline: ["Talvez investir nunca tenha sido difícil.", "Só faltava alguém explicar na sua língua."],
   intro: "Skincare tem ordem: limpar, hidratar, tratar, proteger. Dinheiro também. Comprar ácido antes do sabonete dá errado. Investir antes de organizar, também.",
   steps: [
     { number: "01", skin: "Limpar", money: "Organizar", detail: "Cortar o que drena: juros, parcelas, assinaturas esquecidas." },
@@ -96,13 +96,15 @@ export const method = {
     { number: "03", skin: "Tratar", money: "Investir", detail: "Entender Selic, CDI, CDB, Tesouro, ações e FIIs." },
     { number: "04", skin: "Proteger", money: "Construir patrimônio", detail: "Plano de 1, 5 e 10 anos e uma rotina que se repete." },
   ],
-  cta: "Ver o bônus",
+  // Pó compacto + pincel (versão clara), ao lado das etapas, como na arte
+  image: { src: "/images/method-compact.webp", alt: "Pó compacto e pincel dourados Glow Finances sobre pó espalhado" },
+  cta: "Traduzir o Financês",
 };
 
 // "Traduzindo o Financês" — glossário real do ebook
 export const glossary = {
   eyebrow: "Traduzindo o Financês",
-  headline: ["Talvez investir nunca tenha sido difícil.", "Só faltava alguém explicar na sua língua."],
+  headline: ["Não é um idioma difícil.", "Só explicaram errado."],
   columns: { from: "Financês", to: "Português" },
   terms: [
     { term: "CDB", jargon: "Certificado de Depósito Bancário.", plain: "Você empresta dinheiro para o banco e recebe juros." },
@@ -129,32 +131,27 @@ export const bonus = {
 };
 
 export const audience = {
-  headline: ["Para quem quer parar de adiar", "e finalmente começar a investir."],
+  headline: ["Talvez seja exatamente", "o que estava faltando."],
   photo: { src: "/images/fernanda-cutout.webp", alt: "Fernanda Oliveira, de pé, consultando um tablet" },
   forYou: {
-    title: "Para quem é",
+    title: "É para você se",
     items: [
-      "Pra quem cansou de deixar o dinheiro pra depois.",
-      "Pra quem quer trocar “preciso começar” por “eu comecei”.",
-      "Pra quem quer saber o que fazer com o próprio dinheiro.",
-      "Pra quem quer investir sem fazer disso um bicho de sete cabeças.",
+      "Nunca soube por onde começar a investir.",
+      "Se sente perdida com termos financeiros.",
+      "Quer entender antes de investir.",
+      "Pensa no longo prazo.",
     ],
   },
   notForYou: {
-    title: "Para quem não é",
-    items: [
-      "Pra quem procura dinheiro fácil.",
-      "Pra quem espera uma fórmula mágica.",
-      "Pra quem quer resultado sem começar.",
-      "Pra quem procura promessas de rentabilidade.",
-    ],
+    title: "Não é para você se",
+    items: ["Procura enriquecimento rápido.", "Quer uma fórmula mágica.", "Quer promessa de rentabilidade."],
   },
   shifts: [
     { from: "Confusão", to: "Clareza" },
     { from: "Ansiedade", to: "Organização" },
     { from: "Impulso", to: "Intencionalidade" },
   ],
-  cta: "O seu próximo passo",
+  cta: "Conhecer a autora",
 };
 
 // Seção 06 — fechamento antes da autora

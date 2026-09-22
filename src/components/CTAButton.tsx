@@ -19,17 +19,19 @@ interface Props {
   /** Tom do fundo em que o botão está. */
   tone?: Tone;
   icon?: "right" | "down" | "none";
-  size?: "md" | "lg";
+  size?: "compact" | "md" | "lg";
   className?: string;
   ariaLabel?: string;
 }
 
 const base =
-  "group inline-flex items-center justify-center gap-3 text-center sm:whitespace-nowrap rounded-[var(--radius-pill)] font-sans font-medium tracking-[0.18em] uppercase transition-all duration-500 ease-[var(--ease-glow)] will-change-transform hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 select-none";
+  "group inline-flex items-center justify-center text-center sm:whitespace-nowrap rounded-[var(--radius-pill)] font-sans font-medium uppercase transition-all duration-500 ease-[var(--ease-glow)] will-change-transform hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-4 select-none";
 
 const sizes: Record<NonNullable<Props["size"]>, string> = {
-  md: "min-h-12 px-7 text-[0.7rem]",
-  lg: "min-h-14 px-9 text-[0.75rem]",
+  /** Menor no mobile (cabe ao lado de uma imagem), igual ao md a partir de sm. */
+  compact: "min-h-11 gap-2 whitespace-nowrap px-5 text-[0.6rem] tracking-[0.14em] sm:min-h-12 sm:gap-3 sm:px-7 sm:text-[0.7rem] sm:tracking-[0.18em]",
+  md: "min-h-12 gap-3 px-7 text-[0.7rem] tracking-[0.18em]",
+  lg: "min-h-14 gap-3 px-9 text-[0.75rem] tracking-[0.18em]",
 };
 
 const styles: Record<Tone, Record<Variant, string>> = {
