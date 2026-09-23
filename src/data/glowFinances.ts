@@ -239,14 +239,14 @@ export const socialProof = {
   items: [
     {
       quote:
-        "Eu adiava porque achava que precisava entender tudo antes de começar. Entendi que dava para começar com o que já estava na minha mão, sem culpa e sem pressa.",
-      name: "Marina Prado",
+        "Vantagens de ser amiga da Fernanda: ganhar acesso antes 😂 Era pra eu dar minha opinião e acabei aprendendo muito mais do que imaginava kkk",
+      name: "Marina",
       avatar: "/images/depoimento-1.webp",
     },
     {
       quote:
-        "Traduzir os termos foi o que destravou. Hoje eu abro o app do banco e entendo o que estou vendo. Só isso já tirou um peso enorme.",
-      name: "Camila Kamiński",
+        "Fê, eu já organizei minha vida inteira nessa planilha 😂😂 agora entendi pq vc tava tão empolgada fazendo isso",
+      name: "Camila",
       avatar: "/images/depoimento-2.webp",
     },
   ],
