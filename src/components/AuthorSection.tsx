@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { author } from "@/data/glowFinances";
+import { Instagram } from "lucide-react";
+import { author, commercial } from "@/data/glowFinances";
 import { scaleIn } from "@/lib/animations";
 import CTAButton from "./CTAButton";
 import Parallax from "./Parallax";
@@ -58,6 +59,21 @@ export default function AuthorSection() {
             </Reveal>
             <Reveal index={1} as="p" className="mt-3 font-sans text-[0.66rem] uppercase tracking-[0.26em] text-glow-terracotta">
               {author.role}
+            </Reveal>
+
+            {/* Contato direto com a autora */}
+            <Reveal index={1} className="mt-3">
+              <a
+                href={commercial.instagram.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 font-sans text-[0.78rem] text-glow-black/70 transition-colors duration-300 hover:text-glow-terracotta"
+              >
+                <Instagram className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+                <span className="underline decoration-glow-black/20 underline-offset-4 transition-colors duration-300 group-hover:decoration-glow-terracotta/60">
+                  {commercial.instagram.handle}
+                </span>
+              </a>
             </Reveal>
 
             <Reveal index={2} className="mt-4 flex max-w-lg flex-col gap-3 lg:mt-6">

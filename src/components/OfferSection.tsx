@@ -45,7 +45,7 @@ export default function OfferSection() {
           {/* Texto + timer + logo */}
           <div className="min-w-0 max-w-xl">
             <Reveal index={0} as="p" className="eyebrow mb-3 hidden text-glow-beige/70 sm:block lg:mb-5">
-              09 · Comece agora
+              10 · Comece agora
             </Reveal>
             <Reveal index={1}>
               <h2 id="oferta-title" className="text-display text-[clamp(1.55rem,5.2vw,4.2rem)]">
@@ -84,8 +84,8 @@ export default function OfferSection() {
             <div className="relative w-full max-w-full rounded-[var(--radius-card)] bg-glow-cream p-3 text-glow-black shadow-[var(--shadow-deep)] sm:p-8">
               <div className="flex gap-4 sm:gap-6">
                 {/* Capa do ebook dentro do card */}
-                <div className="w-[76px] shrink-0 sm:w-[152px] lg:w-[200px]">
-                  <BookMockup className="w-full" sizes="200px" />
+                <div className="w-[96px] shrink-0 sm:w-[192px] lg:w-[252px]">
+                  <BookMockup className="w-full" sizes="252px" />
                 </div>
 
                 <div className="min-w-0 flex-1">

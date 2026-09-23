@@ -35,6 +35,8 @@ export const commercial = {
   /** Canônica do site — usada em SEO / Open Graph. */
   canonicalUrl: "https://[INSERIR-DOMINIO]",
   contactEmail: "[INSERIR E-MAIL DE CONTATO]",
+  /** Instagram da autora — canal de contato informado no briefing. */
+  instagram: { handle: "@oliver.fer_", url: "https://instagram.com/oliver.fer_" },
   termsUrl: "#",
   privacyUrl: "#",
 };
@@ -65,6 +67,7 @@ export type SectionId =
   | "proximo-passo"
   | "autora"
   | "faq"
+  | "prova-social"
   | "oferta";
 
 export const sections: { id: SectionId; label: string }[] = [
@@ -76,6 +79,7 @@ export const sections: { id: SectionId; label: string }[] = [
   { id: "proximo-passo", label: "O seu próximo passo" },
   { id: "autora", label: "Autora" },
   { id: "faq", label: "Perguntas" },
+  { id: "prova-social", label: "Quem já começou" },
   { id: "oferta", label: "Oferta" },
 ];
 
@@ -204,6 +208,52 @@ export const faq = {
   cta: "Ir para a oferta",
 };
 
+/**
+ * Seção 09 — Prova social.
+ *
+ * ================== LEIA ANTES DE PUBLICAR ==================
+ * NADA NESTE BLOCO É REAL. Os nomes são fictícios, as falas foram
+ * escritas por nós e os rostos são de banco de imagem: são pessoas
+ * que nunca tiveram contato com o produto. Como a página não sinaliza
+ * mais isso para quem visita, os depoimentos aparecem como se fossem
+ * de leitoras de verdade.
+ *
+ * No ar, num site que vende, isso é publicidade enganosa (CDC, art. 37).
+ * Troque por depoimentos reais e autorizados antes de publicar.
+ * ============================================================
+ *
+ * A foto da cena (prova-social.webp) foi fornecida no projeto.
+ * Avatares atuais (Unsplash License, uso comercial livre):
+ *   avatar 1 unsplash.com/photos/photo-1662850886700-4ec19bd30d11
+ *   avatar 2 unsplash.com/photos/photo-1587238607741-e49e70bf8525
+ */
+export const socialProof = {
+  eyebrow: "Quem já começou",
+  headline: ["Ninguém começa", "sabendo."],
+  intro:
+    "O que mais aparece nas mensagens de quem leu não é sobre rendimento. É sobre parar de se sentir perdida com o próprio dinheiro.",
+  photo: {
+    src: "/images/prova-social.webp",
+    alt: "Mulher deitada no tapete da sala, lendo um material impresso",
+  },
+  items: [
+    {
+      quote:
+        "Eu adiava porque achava que precisava entender tudo antes de começar. Entendi que dava para começar com o que já estava na minha mão, sem culpa e sem pressa.",
+      name: "Marina Prado",
+      avatar: "/images/depoimento-1.webp",
+    },
+    {
+      quote:
+        "Traduzir os termos foi o que destravou. Hoje eu abro o app do banco e entendo o que estou vendo. Só isso já tirou um peso enorme.",
+      name: "Camila Kamiński",
+      avatar: "/images/depoimento-2.webp",
+    },
+  ],
+  note: "Cada uma tem seu ritmo. O Glow Finances é material educacional, não promessa de rentabilidade.",
+  cta: "Ver a oferta",
+};
+
 export const offer = {
   headline: "Seu dinheiro merece uma rotina.",
   subheadline: "Comece entendendo. Depois, cuide. Então, construa.",
@@ -226,6 +276,7 @@ export const footer = {
   brand: "Glow Finances™",
   byline: "Por Fernanda Oliveira",
   links: [
+    { label: commercial.instagram.handle, href: commercial.instagram.url, external: true },
     { label: "Termos de Uso", href: commercial.termsUrl },
     { label: "Política de Privacidade", href: commercial.privacyUrl },
     { label: "Contato", href: `mailto:${commercial.contactEmail}` },

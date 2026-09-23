@@ -6,6 +6,7 @@ import AudienceSection from "@/components/AudienceSection";
 import NextStepSection from "@/components/NextStepSection";
 import AuthorSection from "@/components/AuthorSection";
 import FAQ from "@/components/FAQ";
+import SocialProofSection from "@/components/SocialProofSection";
 import OfferSection from "@/components/OfferSection";
 import SectionNavigator from "@/components/SectionNavigator";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -26,6 +27,7 @@ export default function Page() {
         <NextStepSection />
         <AuthorSection />
         <FAQ />
+        <SocialProofSection />
         <OfferSection />
       </main>
       <StickyCTA />
