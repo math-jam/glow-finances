@@ -8,30 +8,15 @@ import MobilePhotoBackdrop from "./MobilePhotoBackdrop";
 import Parallax from "./Parallax";
 import Reveal from "./Reveal";
 
-/**
- * Foto de quem comentou. Sem foto autorizada, cai no monograma — nunca em um
- * rosto genérico sem querer.
- */
-function Avatar({ src, name }: { src?: string; name: string }) {
-  const base =
-    "relative h-11 w-11 shrink-0 overflow-hidden rounded-full ring-1 ring-glow-black/10 sm:h-12 sm:w-12";
-
-  if (!src) {
-    const initial = name.replace(/[^\p{L}]/gu, "").charAt(0).toUpperCase() || "•";
-    return (
-      <span
-        aria-hidden="true"
-        className={`${base} flex items-center justify-center bg-glow-beige font-serif text-lg text-glow-brown`}
-      >
-        {initial}
-      </span>
-    );
-  }
-
+/** Inicial de quem comentou, no lugar da foto. */
+function Monogram({ name }: { name: string }) {
+  const initial = name.replace(/[^\p{L}]/gu, "").charAt(0).toUpperCase() || "•";
   return (
-    <span className={base}>
-      {/* alt vazio: o nome vem logo ao lado, no texto */}
-      <Image src={src} alt="" fill sizes="48px" className="object-cover" />
+    <span
+      aria-hidden="true"
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-glow-beige font-serif text-lg text-glow-brown ring-1 ring-glow-black/10 sm:h-12 sm:w-12"
+    >
+      {initial}
     </span>
   );
 }
@@ -111,7 +96,7 @@ export default function SocialProofSection() {
                 >
                   {/* Cabeçalho do comentário: foto + quem escreveu */}
                   <div className="flex items-center gap-3">
-                    <Avatar src={item.avatar} name={item.name} />
+                    <Monogram name={item.name} />
                     <p className="min-w-0 font-sans text-[0.72rem] uppercase tracking-[0.18em] text-glow-black">
                       {item.name}
                     </p>

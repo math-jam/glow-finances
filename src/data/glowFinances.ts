@@ -211,21 +211,13 @@ export const faq = {
 /**
  * Seção 09 — Prova social.
  *
- * ================== LEIA ANTES DE PUBLICAR ==================
- * NADA NESTE BLOCO É REAL. Os nomes são fictícios, as falas foram
- * escritas por nós e os rostos são de banco de imagem: são pessoas
- * que nunca tiveram contato com o produto. Como a página não sinaliza
- * mais isso para quem visita, os depoimentos aparecem como se fossem
- * de leitoras de verdade.
+ * As falas vieram de mensagens de leitoras, fornecidas no projeto. Antes de
+ * publicar, confirme que cada uma autorizou o uso da mensagem e do primeiro
+ * nome: depoimento sem autorização (ou reescrito) é publicidade enganosa
+ * (CDC, art. 37).
  *
- * No ar, num site que vende, isso é publicidade enganosa (CDC, art. 37).
- * Troque por depoimentos reais e autorizados antes de publicar.
- * ============================================================
- *
- * A foto da cena (prova-social.webp) foi fornecida no projeto.
- * Avatares atuais (Unsplash License, uso comercial livre):
- *   avatar 1 unsplash.com/photos/photo-1662850886700-4ec19bd30d11
- *   avatar 2 unsplash.com/photos/photo-1587238607741-e49e70bf8525
+ * A foto da cena (prova-social.webp) foi fornecida no projeto. Os cards não
+ * usam foto: cada um mostra a inicial do nome.
  */
 export const socialProof = {
   eyebrow: "Quem já começou",
@@ -241,13 +233,11 @@ export const socialProof = {
       quote:
         "Vantagens de ser amiga da Fernanda: ganhar acesso antes 😂 Era pra eu dar minha opinião e acabei aprendendo muito mais do que imaginava kkk",
       name: "Marina",
-      avatar: "/images/depoimento-1.webp",
     },
     {
       quote:
         "Fê, eu já organizei minha vida inteira nessa planilha 😂😂 agora entendi pq vc tava tão empolgada fazendo isso",
       name: "Camila",
-      avatar: "/images/depoimento-2.webp",
     },
   ],
   note: "Cada uma tem seu ritmo. O Glow Finances é material educacional, não promessa de rentabilidade.",
