@@ -36,7 +36,7 @@ export const commercial = {
   canonicalUrl: "https://[INSERIR-DOMINIO]",
   contactEmail: "[INSERIR E-MAIL DE CONTATO]",
   /** Instagram da autora — canal de contato informado no briefing. */
-  instagram: { handle: "@oliver.fer_", url: "https://instagram.com/oliver.fer_" },
+  instagram: { handle: "@glow.f.oliver_", url: "https://instagram.com/glow.f.oliver_/" },
   termsUrl: "#",
   privacyUrl: "#",
 };
